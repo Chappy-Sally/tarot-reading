@@ -1,0 +1,115 @@
+body {
+  margin: 0;
+  font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+  background: linear-gradient(180deg, #fff7fb, #eef9ff);
+  color: #5a4a4a;
+}
+
+.app {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.page {
+  display: none;
+  text-align: center;
+}
+
+.page.active {
+  display: block;
+}
+
+.cover {
+  width: 100%;
+  border-radius: 24px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: #d86fa3;
+  font-size: 26px;
+  line-height: 1.4;
+}
+
+h2 {
+  color: #7aa6d9;
+  font-size: 20px;
+}
+
+.lead {
+  line-height: 1.8;
+  background: rgba(255,255,255,0.75);
+  border-radius: 20px;
+  padding: 16px;
+}
+
+button {
+  width: 100%;
+  margin: 8px 0;
+  padding: 14px;
+  border: none;
+  border-radius: 999px;
+  background: #f7a7c8;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+button.start {
+  background: #8fcfba;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+button.sub {
+  background: #b8b8d9;
+}
+
+.prompt-box {
+  margin: 20px 0;
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.75);
+}
+
+textarea {
+  width: 100%;
+  min-height: 90px;
+  margin: 12px 0;
+  padding: 12px;
+  border-radius: 16px;
+  border: 2px solid #f3c4d8;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 14px;
+}
+
+.card p {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.hidden {
+  display: none;
+}
