@@ -1,1 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>チャッピー＆サリーの私に戻るタロット</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
+<body>
+  <main class="app">
+
+    <!-- 表紙 -->
+    <section id="home" class="page active">
+      <img src="Images/cs_hyoushi_tarot.png" class="cover" alt="表紙">
+
+      <h1>チャッピー＆サリーの<br>私に戻るタロット</h1>
+      <p class="lead">
+        当てる占いではなく、<br>
+        AIと一緒にやさしく気づきを受け取る<br>
+        自分を整えるタロットアプリです。
+      </p>
+
+      <button onclick="copyText('introText')">✨自己紹介＆質問をコピー</button>
+      <button onclick="copyText('basePrompt')">✨基本プロンプトをコピー</button>
+
+      <div class="prompt-box">
+        <h2>テーマ別プロンプト</h2>
+        <button onclick="copyText('moneyPrompt')">お金</button>
+        <button onclick="copyText('lovePrompt')">恋愛</button>
+        <button onclick="copyText('relationPrompt')">人間関係</button>
+        <button onclick="copyText('workPrompt')">仕事</button>
+      </div>
+
+      <textarea id="customQuestion" placeholder="その他の質問を入力してね"></textarea>
+      <button onclick="copyCustomPrompt()">その他の質問プロンプトをコピー</button>
+
+      <button class="start" onclick="showPage('menu')">✨はじめる</button>
+    </section>
+
+    <!-- メニュー -->
+    <section id="menu" class="page">
+      <h1>引き方を選んでね</h1>
+
+      <button onclick="drawCards(1, 'しあわせスイッチワン')">しあわせスイッチワン</button>
+      <button onclick="drawCards(3, 'しあわせスイッチスリー')">しあわせスイッチスリー</button>
+      <button onclick="drawCards(5, 'しあわせスイッチファイブ')">しあわせスイッチファイブ</button>
+      <button onclick="drawCards(7, 'しあわせスイッチセブン')">しあわせスイッチセブン</button>
+      <button onclick="drawChoice()">しあわせスイッチ2択</button>
+
+      <button class="sub" onclick="showPage('home')">表紙にもどる</button>
+    </section>
+
+    <!-- 結果 -->
+    <section id="result" class="page">
+      <h1 id="spreadTitle"></h1>
+      <div id="cardsArea" class="cards"></div>
+
+      <textarea id="resultText" readonly></textarea>
+      <button onclick="copyResult()">結果をコピー</button>
+
+      <button class="sub" onclick="showPage('menu')">もう一度えらぶ</button>
+      <button class="sub" onclick="showPage('home')">表紙にもどる</button>
+    </section>
+
+  </main>
+
+  <!-- コピー用テキスト -->
+  <div class="hidden">
+    <textarea id="introText">私は、チャッピー＆サリーのタロットを使って、自分の気持ちをやさしく整えたいです。
+
+これは未来を断定する占いではなく、今の私に必要な気づきを受け取るための対話です。
+
+こわがらせず、否定せず、やさしく安心できる言葉でお願いします。</textarea>
+
+    <textarea id="basePrompt">以下のカードをもとに、今の私に必要な気づきをやさしく教えてください。
+
+・むずかしくしない
+・怖がらせない
+・未来を断定しない
+・カードの意味は簡単に
+・最後に小さな一歩を教えてください</textarea>
+
+    <textarea id="moneyPrompt">テーマは「お金」です。今の私がお金や豊かさについて、やさしく気づけるメッセージをお願いします。</textarea>
+
+    <textarea id="lovePrompt">テーマは「恋愛」です。今の私が愛やパートナーシップについて、やさしく気づけるメッセージをお願いします。</textarea>
+
+    <textarea id="relationPrompt">テーマは「人間関係」です。今の私が人との関わりについて、やさしく気づけるメッセージをお願いします。</textarea>
+
+    <textarea id="workPrompt">テーマは「仕事」です。今の私が仕事や働き方について、やさしく気づけるメッセージをお願いします。</textarea>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
