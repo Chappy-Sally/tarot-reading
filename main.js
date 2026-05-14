@@ -24,73 +24,112 @@ const cards = [
   ["22_Compass.png", "コンパス"]
 ];
 
-function showPage(id) {
-  document.querySelectorAll(".page").forEach(page => {
+function showPage(id){
+
+  document.querySelectorAll(".page").forEach(page=>{
     page.classList.remove("active");
   });
+
   document.getElementById(id).classList.add("active");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 }
 
-function toggleSection(id) {
-  document.getElementById(id).classList.toggle("hidden");
-}
+function copyText(text){
 
-function copyToClipboard(text) {
   navigator.clipboard.writeText(text)
-    .then(() => alert("コピーしたよ💕"))
-    .catch(() => alert("コピーできなかったみたい🙏 長押しでコピーしてね"));
+    .then(()=>{
+      alert("コピーしたよ💕");
+    })
+    .catch(()=>{
+      alert("コピーできなかったみたい🙏");
+    });
 }
 
-function saveProfile() {
-  const ids = ["p_name", "p_ai", "p_like", "p_dislike", "p_job", "p_future", "p_question"];
-  ids.forEach(id => {
-    localStorage.setItem(id, document.getElementById(id).value);
-  });
-  alert("保存したよ💕");
-}
+function copyTalkPrompt(){
 
-window.addEventListener("load", () => {
-  const ids = ["p_name", "p_ai", "p_like", "p_dislike", "p_job", "p_future", "p_question"];
-  ids.forEach(id => {
-    const saved = localStorage.getItem(id);
-    if (saved) document.getElementById(id).value = saved;
-  });
-});
-
-function copyTalkPrompt() {
   const text = `これから、やさしく対話しながら
 今の私に必要な気づきを受け取りたいです😊
 
-あなたは、怖がらせたり否定したりせず、
+あなたは怖がらせたり否定したりせず、
 安心できる言葉でやさしく整理してくれる相棒です🌈
 
-短い言葉でも受け取ってください。
+短い言葉でも受け取ってください✨`;
 
-最後はやさしく、小さな一歩や安心できる言葉で整えてください✨`;
-  copyToClipboard(text);
+  copyText(text);
 }
 
-function copyProfilePrompt() {
-  const name = document.getElementById("p_name").value;
-  const ai = document.getElementById("p_ai").value;
-  const like = document.getElementById("p_like").value;
-  const dislike = document.getElementById("p_dislike").value;
-  const job = document.getElementById("p_job").value;
-  const future = document.getElementById("p_future").value;
-  const question = document.getElementById("p_question").value;
+function saveProfile(){
+
+  const ids = [
+    "p_name",
+    "p_ai",
+    "p_like",
+    "p_dislike",
+    "p_job",
+    "p_future",
+    "p_question"
+  ];
+
+  ids.forEach(id=>{
+    localStorage.setItem(
+      id,
+      document.getElementById(id).value
+    );
+  });
+
+  alert("保存したよ💕");
+}
+
+window.addEventListener("load",()=>{
+
+  const ids = [
+    "p_name",
+    "p_ai",
+    "p_like",
+    "p_dislike",
+    "p_job",
+    "p_future",
+    "p_question"
+  ];
+
+  ids.forEach(id=>{
+
+    const saved = localStorage.getItem(id);
+
+    if(saved){
+      document.getElementById(id).value = saved;
+    }
+  });
+});
+
+function copyProfilePrompt(){
 
   const text = `こんにちは😊
 
-私の名前は「${name || "未入力"}」です。
-あなたのことは「${ai || "相棒"}」と呼びます。
+私の名前：
+${document.getElementById("p_name").value}
 
-好きなもの：${like || "未入力"}
-苦手なもの：${dislike || "未入力"}
-今のお仕事：${job || "未入力"}
-やってみたいこと：${future || "未入力"}
+AIの名前：
+${document.getElementById("p_ai").value}
+
+好きなもの：
+${document.getElementById("p_like").value}
+
+苦手なもの：
+${document.getElementById("p_dislike").value}
+
+今のお仕事：
+${document.getElementById("p_job").value}
+
+やってみたいこと：
+${document.getElementById("p_future").value}
 
 今の質問：
-${question || "未入力"}
+${document.getElementById("p_question").value}
 
 これは未来を断定する占いではなく、
 今の本音や気づきをやさしく受け取るための対話です。
@@ -98,85 +137,145 @@ ${question || "未入力"}
 怖がらせたり否定したりせず、
 安心できる言葉でやさしく教えてください🌈`;
 
-  copyToClipboard(text);
+  copyText(text);
 }
 
-function copyPrompt(type) {
+function copyPrompt(type){
+
   const prompts = {
-    money: "テーマは「お金」です。今の私がお金や豊かさについて、やさしく気づけるメッセージをお願いします。",
-    love: "テーマは「恋愛」です。今の私が愛やパートナーシップについて、やさしく気づけるメッセージをお願いします。",
-    human: "テーマは「人間関係」です。今の私が人との関わりについて、やさしく気づけるメッセージをお願いします。",
-    work: "テーマは「仕事」です。今の私が仕事や働き方について、やさしく気づけるメッセージをお願いします。"
+
+    money:
+`テーマは「お金」です。
+
+今の私がお金や豊かさについて、
+やさしく気づけるメッセージをお願いします。`,
+
+    love:
+`テーマは「恋愛」です。
+
+今の私が恋愛について、
+やさしく気づけるメッセージをお願いします。`,
+
+    human:
+`テーマは「人間関係」です。
+
+今の私が人間関係について、
+やさしく気づけるメッセージをお願いします。`,
+
+    work:
+`テーマは「仕事」です。
+
+今の私が仕事について、
+やさしく気づけるメッセージをお願いします。`
   };
-  copyToClipboard(prompts[type]);
+
+  copyText(prompts[type]);
 }
 
-function copyOtherPrompt() {
-  const q = document.getElementById("otherQuestion").value.trim();
+function copyOtherPrompt(){
 
-  if (!q) {
+  const q =
+    document.getElementById("otherQuestion").value;
+
+  if(!q.trim()){
     alert("質問を書いてね😊");
     return;
   }
 
   const text = `テーマは「${q}」です。
 
-このテーマについて、今の私に必要な気づきをやさしく教えてください。
+このテーマについて、
+今の私に必要な気づきを
+やさしく教えてください🌈`;
 
-・怖がらせない
-・否定しない
-・未来を断定しない
-・安心できる言葉で
-・最後に小さな一歩を教えてください🌈`;
-
-  copyToClipboard(text);
+  copyText(text);
 }
 
-function shuffle(array) {
-  return [...array].sort(() => Math.random() - 0.5);
+function shuffle(array){
+  return [...array].sort(()=>Math.random()-0.5);
 }
 
-function drawCards(count, title) {
-  const selected = shuffle(cards).slice(0, count);
-  showResult(title, selected, false);
+function drawCards(count,title){
+
+  const selected =
+    shuffle(cards).slice(0,count);
+
+  showResult(title,selected,false);
 }
 
-function drawChoice() {
-  const selected = shuffle(cards).slice(0, 2);
-  showResult("しあわせスイッチセレクト", selected, true);
+function drawChoice(){
+
+  const selected =
+    shuffle(cards).slice(0,2);
+
+  showResult(
+    "しあわせスイッチセレクト",
+    selected,
+    true
+  );
 }
 
-function showResult(title, selected, isChoice) {
+function showResult(title,selected,isChoice){
+
   showPage("resultPage");
 
-  document.getElementById("resultTitle").textContent = title;
-  const area = document.getElementById("cardsArea");
+  document.getElementById(
+    "resultTitle"
+  ).textContent = title;
+
+  const area =
+    document.getElementById("cardsArea");
+
   area.innerHTML = "";
 
   let text = `【${title}】\n\n`;
 
-  selected.forEach((card, index) => {
-    const direction = Math.random() > 0.5 ? "正位置" : "逆位置";
+  selected.forEach((card,index)=>{
+
+    const direction =
+      Math.random()>0.5
+      ? "正位置"
+      : "逆位置";
 
     const label = isChoice
-      ? index === 0 ? "Aの選択" : "Bの選択"
-      : `${index + 1}枚目`;
+      ? index===0
+        ? "Aの選択"
+        : "Bの選択"
+      : `${index+1}枚目`;
 
     area.innerHTML += `
       <div class="card-item">
-        <img src="Images/${card[0]}" alt="${card[1]}" onerror="this.style.display='none'">
-        <div class="card-name">${label}<br>${card[1]}（${direction}）</div>
+
+        <img
+          src="Images/${card[0]}"
+          alt="${card[1]}"
+          onerror="this.style.display='none'"
+        >
+
+        <div class="card-name">
+          ${label}<br>
+          ${card[1]}（${direction}）
+        </div>
+
       </div>
     `;
 
     text += `${label}：${card[1]}（${direction}）\n`;
   });
 
-  text += `\nこのカードをもとに、今の私に必要な気づきを、やさしく分かりやすく教えてください。`;
+  text += `
+このカードをもとに、
+今の私に必要な気づきを
+やさしく分かりやすく教えてください🌈`;
 
-  document.getElementById("resultText").value = text;
+  document.getElementById(
+    "resultText"
+  ).value = text;
 }
 
-function copyResult() {
-  copyToClipboard(document.getElementById("resultText").value);
+function copyResult(){
+
+  copyText(
+    document.getElementById("resultText").value
+  );
 }
