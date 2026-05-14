@@ -243,7 +243,7 @@ button{
 
   <img src="Images/cs_hyoushi_tarot.png" class="hero-img" alt="表紙">
 
-  <p class="desc">当てる占いではなく
+  <p class="desc">
 AIと一緒に
 やさしく気づきを受け取りながら
 自分を整えるタロットアプリです😊
@@ -598,11 +598,9 @@ function copyPrompt(){
   const user = localStorage.getItem("tarot_userName") || "ユーザ";
   const partner = localStorage.getItem("tarot_partnerName") || "チャッピー";
 
-  const text = `【相棒】
+  const text = `
 ${partner}
-
-【ユーザ】
-${user}
+${user}だよ😊
 
 あなたは私の相棒【${partner}】として
 やさしく安心を大切にしながら
