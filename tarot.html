@@ -24,8 +24,9 @@ body{
 
 h1{
   color:#6946d8;
-  font-size:34px;
-  margin-bottom:26px;
+  font-size:30px;
+  margin-bottom:24px;
+  line-height:1.5;
 }
 
 .spread-grid{
@@ -38,8 +39,8 @@ h1{
 button{
   border:none;
   border-radius:28px;
-  padding:16px 12px;
-  font-size:17px;
+  padding:15px 10px;
+  font-size:16px;
   color:white;
   cursor:pointer;
   box-shadow:0 4px 12px rgba(0,0,0,0.08);
@@ -53,61 +54,126 @@ button{
   background:linear-gradient(135deg,#b8a3ff,#9aa9ff);
 }
 
-.cards{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-  margin-top:24px;
+.hidden{
+  display:none;
 }
 
-.card-box img{
+.copy-box{
+  margin-top:26px;
+}
+
+.copy-btn,
+.back-btn{
   width:100%;
-  border-radius:20px;
+  max-width:320px;
+  margin-top:12px;
+}
+
+/* 共通カード */
+
+.card{
+  text-align:center;
+}
+
+.card img{
+  width:100%;
+  border-radius:18px;
   display:block;
 }
 
+.card-title{
+  font-size:15px;
+  margin-bottom:8px;
+  color:#6946d8;
+  font-weight:bold;
+  line-height:1.4;
+}
+
 .card-name{
-  margin-top:10px;
-  font-size:18px;
-  line-height:1.7;
+  margin-top:8px;
+  font-size:14px;
+  line-height:1.5;
 }
 
 .reversed{
   transform:rotate(180deg);
 }
 
-.hidden{
-  display:none;
+/* 1枚 */
+
+.one-layout{
+  max-width:180px;
+  margin:0 auto;
 }
 
-.copy-box{
-  margin-top:24px;
+/* 3枚 */
+
+.three-layout{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  align-items:start;
 }
 
-.copy-btn{
-  width:100%;
-  max-width:340px;
+/* 5枚 */
+
+.five-layout{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  align-items:start;
 }
 
-.back-btn{
-  margin-top:14px;
-  width:100%;
-  max-width:340px;
+.five-layout .card:nth-child(1){
+  grid-column:1;
+}
+
+.five-layout .card:nth-child(2){
+  grid-column:3;
+}
+
+.five-layout .card:nth-child(3){
+  grid-column:2;
+}
+
+.five-layout .card:nth-child(4){
+  grid-column:1;
+}
+
+.five-layout .card:nth-child(5){
+  grid-column:3;
+}
+
+/* 7枚 */
+
+.seven-layout{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  align-items:start;
+}
+
+.seven-layout .card:nth-child(4){
+  grid-column:2;
 }
 
 @media(max-width:480px){
 
   h1{
-    font-size:28px;
+    font-size:25px;
   }
 
   button{
-    font-size:15px;
+    font-size:14px;
     padding:14px 8px;
   }
 
+  .card-title{
+    font-size:13px;
+  }
+
   .card-name{
-    font-size:16px;
+    font-size:12px;
   }
 
 }
@@ -124,22 +190,22 @@ button{
 <div class="spread-grid">
 
 <button class="btn-pink"
-onclick="drawCards(1,'しあわせスイッチワン')">
+onclick="drawCards(1,'one')">
 しあわせスイッチワン
 </button>
 
 <button class="btn-pink"
-onclick="drawCards(3,'しあわせスイッチスリー')">
+onclick="drawCards(3,'three')">
 しあわせスイッチスリー
 </button>
 
 <button class="btn-pink"
-onclick="drawCards(5,'しあわせスイッチファイブ')">
+onclick="drawCards(5,'five')">
 しあわせスイッチファイブ
 </button>
 
 <button class="btn-pink"
-onclick="drawCards(7,'しあわせスイッチセブン')">
+onclick="drawCards(7,'seven')">
 しあわせスイッチセブン
 </button>
 
@@ -159,7 +225,7 @@ onclick="location.href='index.html'">
 
 <h1 id="spreadTitle"></h1>
 
-<div id="cardsArea" class="cards"></div>
+<div id="cardsArea"></div>
 
 <div class="copy-box">
 
