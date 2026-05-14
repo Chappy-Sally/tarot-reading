@@ -66,6 +66,27 @@ button{
   display:none;
 }
 
+.select-box{
+  background:#fff;
+  border-radius:24px;
+  padding:18px 14px;
+  margin:18px 0 24px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.select-text{
+  line-height:1.8;
+  color:#7b5b39;
+  font-size:15px;
+  margin-bottom:16px;
+}
+
+.select-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
 .card{
   text-align:center;
   width:100%;
@@ -116,30 +137,11 @@ button{
   justify-items:center;
 }
 
-.five-layout .card:nth-child(1){
-  grid-column:1;
-  grid-row:1;
-}
-
-.five-layout .card:nth-child(2){
-  grid-column:3;
-  grid-row:1;
-}
-
-.five-layout .card:nth-child(3){
-  grid-column:2;
-  grid-row:2;
-}
-
-.five-layout .card:nth-child(4){
-  grid-column:1;
-  grid-row:3;
-}
-
-.five-layout .card:nth-child(5){
-  grid-column:3;
-  grid-row:3;
-}
+.five-layout .card:nth-child(1){ grid-column:1; grid-row:1; }
+.five-layout .card:nth-child(2){ grid-column:3; grid-row:1; }
+.five-layout .card:nth-child(3){ grid-column:2; grid-row:2; }
+.five-layout .card:nth-child(4){ grid-column:1; grid-row:3; }
+.five-layout .card:nth-child(5){ grid-column:3; grid-row:3; }
 
 .seven-layout{
   display:grid;
@@ -154,39 +156,20 @@ button{
   transform:scale(0.9);
 }
 
-.seven-layout .card:nth-child(1){
-  grid-column:1;
-  grid-row:1;
-}
+.seven-layout .card:nth-child(1){ grid-column:1; grid-row:1; }
+.seven-layout .card:nth-child(2){ grid-column:2; grid-row:1; }
+.seven-layout .card:nth-child(3){ grid-column:3; grid-row:1; }
+.seven-layout .card:nth-child(4){ grid-column:2; grid-row:2; }
+.seven-layout .card:nth-child(5){ grid-column:1; grid-row:3; }
+.seven-layout .card:nth-child(6){ grid-column:2; grid-row:3; }
+.seven-layout .card:nth-child(7){ grid-column:3; grid-row:3; }
 
-.seven-layout .card:nth-child(2){
-  grid-column:2;
-  grid-row:1;
-}
-
-.seven-layout .card:nth-child(3){
-  grid-column:3;
-  grid-row:1;
-}
-
-.seven-layout .card:nth-child(4){
-  grid-column:2;
-  grid-row:2;
-}
-
-.seven-layout .card:nth-child(5){
-  grid-column:1;
-  grid-row:3;
-}
-
-.seven-layout .card:nth-child(6){
-  grid-column:2;
-  grid-row:3;
-}
-
-.seven-layout .card:nth-child(7){
-  grid-column:3;
-  grid-row:3;
+.select-layout{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(110px, 160px));
+  gap:16px;
+  justify-content:center;
+  align-items:start;
 }
 
 .copy-btn{
@@ -222,6 +205,11 @@ button{
   .seven-layout{
     gap:8px;
   }
+
+  .select-layout{
+    grid-template-columns:repeat(2, minmax(110px, 150px));
+    gap:14px;
+  }
 }
 </style>
 </head>
@@ -256,15 +244,34 @@ button{
     </div>
 
     <div class="menu-item">
-      <button onclick="drawCards('select')">しあわせスイッチセレクト</button>
+      <button onclick="openSelectChoice()">しあわせスイッチセレクト</button>
       <div class="menu-note">AかBで迷った時に</div>
     </div>
 
     <div class="menu-item">
-      <button class="back" onclick="location.href='index.html'">戻る</button>
+      <button class="back" onclick="location.href='index.html'">HOMEへ戻る</button>
     </div>
 
   </div>
+</div>
+
+<div id="selectChoice" class="hidden">
+  <h1>しあわせスイッチセレクト</h1>
+
+  <div class="select-box">
+    <div class="select-text">
+      AとBで迷った時に😊<br>
+      先に「今の私はどちらが気になるか」を選んでね。<br>
+      そのあとカードで、やさしく流れを見ていくよ🌈
+    </div>
+
+    <div class="select-buttons">
+      <button onclick="drawSelect('A')">Aを選ぶ</button>
+      <button onclick="drawSelect('B')">Bを選ぶ</button>
+    </div>
+  </div>
+
+  <button class="copy-btn back" onclick="backMenuFromSelect()">戻る</button>
 </div>
 
 <div id="result" class="hidden">
@@ -272,14 +279,14 @@ button{
   <div id="cardsArea"></div>
 
   <button class="copy-btn" onclick="copyResult()">結果をコピー🌈</button>
-  <button class="copy-btn back" onclick="backMenu()">HOMEへ戻る</button>
+  <button class="copy-btn back" onclick="backMenu()">戻る</button>
 </div>
 
 </div>
 
 <script>
 const cards = [
-  ["00_The_Fool.png","愚者"],
+  ["fool.jpg","愚者"],
   ["01_The_Magician.png","魔術師"],
   ["02_The_High_Priestess.png","女教皇"],
   ["03_The_Empress.png","女帝"],
@@ -341,15 +348,6 @@ const spreads = {
       "ヒント",
       "スイッチON"
     ]
-  },
-
-  select:{
-    title:"しあわせスイッチセレクト",
-    layout:"three-layout",
-    labels:[
-      "Aの選択",
-      "Bの選択"
-    ]
   }
 };
 
@@ -359,11 +357,24 @@ function shuffle(array){
   return [...array].sort(()=>Math.random()-0.5);
 }
 
+function openSelectChoice(){
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("selectChoice").classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+
+function backMenuFromSelect(){
+  document.getElementById("selectChoice").classList.add("hidden");
+  document.getElementById("menu").classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+
 function drawCards(type){
   const spread = spreads[type];
   const selected = shuffle(cards).slice(0, spread.labels.length);
 
   document.getElementById("menu").classList.add("hidden");
+  document.getElementById("selectChoice").classList.add("hidden");
   document.getElementById("result").classList.remove("hidden");
   document.getElementById("title").textContent = spread.title;
 
@@ -402,6 +413,52 @@ function drawCards(type){
   window.scrollTo(0,0);
 }
 
+function drawSelect(choice){
+  const selected = shuffle(cards).slice(0, 2);
+
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("selectChoice").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+  document.getElementById("title").textContent = "しあわせスイッチセレクト";
+
+  const area = document.getElementById("cardsArea");
+  area.className = "select-layout";
+  area.innerHTML = "";
+
+  resultText = `【しあわせスイッチセレクト】\n\n`;
+  resultText += `私は「${choice}」を選びました😊\n\n`;
+
+  selected.forEach((card,index)=>{
+    const direction = Math.random() > 0.5 ? "正位置" : "逆位置";
+    const reverseClass = direction === "逆位置" ? "reversed" : "";
+    const label = index === 0 ? "Aの選択" : "Bの選択";
+
+    area.innerHTML += `
+      <div class="card">
+        <div class="card-title">${label}</div>
+
+        <img
+          src="Images/${card[0]}"
+          class="${reverseClass}"
+          alt="${card[1]}"
+        >
+
+        <div class="card-name">
+          ${card[1]}（${direction}）
+        </div>
+      </div>
+    `;
+
+    resultText += `${label}：${card[1]}（${direction}）\n`;
+  });
+
+  resultText += `\n私が選んだ「${choice}」について、今の私に必要なことをやさしく短く教えてください🌈\n`;
+  resultText += `もう片方との違いも、決めつけずに軽く教えてください。\n`;
+  resultText += `どちらが正解かを断定せず、今の気持ちを整理する感じでお願いします😊`;
+
+  window.scrollTo(0,0);
+}
+
 function copyResult(){
   navigator.clipboard.writeText(resultText);
   alert("コピーしたよ🌈");
@@ -409,6 +466,7 @@ function copyResult(){
 
 function backMenu(){
   document.getElementById("result").classList.add("hidden");
+  document.getElementById("selectChoice").classList.add("hidden");
   document.getElementById("menu").classList.remove("hidden");
   window.scrollTo(0,0);
 }
