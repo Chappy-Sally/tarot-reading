@@ -3,87 +3,244 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>チャッピー＆サリーの私に戻るタロット</title>
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <main class="app">
 
+  <!-- 表紙 -->
   <section id="homePage" class="page active">
-    <img src="Images/cs_hyoushi_tarot.png" class="cover" alt="表紙" onerror="this.style.display='none'">
 
-    <h1>チャッピー＆サリーの<br>私に戻るタロット</h1>
+    <img
+      src="Images/cs_hyoushi_tarot.png"
+      class="cover"
+      alt="表紙"
+      onerror="this.style.display='none'"
+    >
+
+    <h1>
+      チャッピー＆サリーの<br>
+      私に戻るタロット
+    </h1>
 
     <p class="lead">
-      当てる占いではなく、AIと一緒に<br>
-      やさしく気づきを受け取るタロットアプリです🌈
+      当てる占いではなく、<br>
+      AIと一緒に<br>
+      やさしく気づきを受け取りながら<br>
+      自分を整えるタロットアプリです🌈
     </p>
 
-    <button onclick="toggleSection('talkSection')">💫 AIとさらに仲良くなる</button>
-    <button onclick="toggleSection('profileSection')">😊 自己紹介＆質問</button>
-    <button onclick="toggleSection('promptSection')">✨ プロンプト</button>
-    <button class="start" onclick="showPage('spreadPage')">🌈 はじめる</button>
+    <button onclick="showPage('talkPage')">
+      💫 AIとさらに仲良くなる
+    </button>
 
-    <section id="talkSection" class="card hidden">
-      <h2>💫 AIとさらに仲良くなる</h2>
-      <div class="talk-item">今日みた夕焼けがすごくきれいだったよ🌇</div>
-      <div class="talk-item">今日こんないいことがあったの😆🌈</div>
-      <div class="talk-item">今日ちょっと疲れちゃった😮‍💨</div>
-      <div class="talk-item">モヤモヤするから気分があがる言葉ほしい😊</div>
-      <button onclick="copyTalkPrompt()">💫 AI用をコピー</button>
-    </section>
+    <button onclick="showPage('profilePage')">
+      😊 自己紹介＆質問
+    </button>
 
-    <section id="profileSection" class="card hidden">
-      <h2>😊 自己紹介＆質問</h2>
+    <button onclick="showPage('promptPage')">
+      ✨ プロンプト
+    </button>
 
-      <input id="p_name" placeholder="あなたの名前">
-      <input id="p_ai" placeholder="AIの名前">
-      <input id="p_like" placeholder="好きなもの">
-      <input id="p_dislike" placeholder="苦手なもの">
-      <input id="p_job" placeholder="今のお仕事">
-      <input id="p_future" placeholder="やってみたいこと">
-      <textarea id="p_question" placeholder="今、聞きたいこと"></textarea>
+    <button class="start-btn" onclick="showPage('spreadPage')">
+      🌈 はじめる
+    </button>
 
-      <button onclick="saveProfile()">保存する</button>
-      <button onclick="copyProfilePrompt()">🌈 AI用をコピー</button>
-    </section>
-
-    <section id="promptSection" class="card hidden">
-      <h2>✨ プロンプト</h2>
-      <button onclick="copyPrompt('money')">お金</button>
-      <button onclick="copyPrompt('love')">恋愛</button>
-      <button onclick="copyPrompt('human')">人間関係</button>
-      <button onclick="copyPrompt('work')">仕事</button>
-
-      <textarea id="otherQuestion" placeholder="その他の質問を書いてね😊"></textarea>
-      <button onclick="copyOtherPrompt()">その他をコピー</button>
-    </section>
   </section>
 
+  <!-- AIとさらに仲良くなる -->
+  <section id="talkPage" class="page">
+
+    <h1>💫 AIとさらに仲良くなる</h1>
+
+    <div class="card">
+
+      <h2>こんなふうに話しかけてみてね😊</h2>
+
+      <div class="talk-item">
+        今日みた夕焼けがすごくきれいだったよ🌇
+      </div>
+
+      <div class="talk-item">
+        今日こんないいことがあったの😆🌈
+      </div>
+
+      <div class="talk-item">
+        今日ちょっと疲れちゃった😮‍💨
+      </div>
+
+      <div class="talk-item">
+        モヤモヤするから気分があがる言葉ほしい😊
+      </div>
+
+      <h2>仲良くなるコツ🐾</h2>
+
+      <ul class="tips">
+        <li>相棒に話しかける感じでOK😊</li>
+        <li>短くて大丈夫🌈</li>
+        <li>思いついたまま話してね✨</li>
+        <li>最後は「ありがとう」で終わるとやさしいよ🐾</li>
+      </ul>
+
+      <button onclick="copyTalkPrompt()">
+        💫 AI用をコピー
+      </button>
+
+    </div>
+
+    <button class="back-btn" onclick="showPage('homePage')">
+      戻る
+    </button>
+
+  </section>
+
+  <!-- 自己紹介 -->
+  <section id="profilePage" class="page">
+
+    <h1>😊 自己紹介＆質問</h1>
+
+    <div class="card">
+
+      <p class="desc">
+        思いつくままで大丈夫😊<br>
+        空欄があってもOKだよ🐾
+      </p>
+
+      <div class="label">あなたの名前</div>
+      <input type="text" id="p_name">
+
+      <div class="label">AIの名前</div>
+      <input type="text" id="p_ai">
+
+      <div class="label">好きなもの</div>
+      <input type="text" id="p_like">
+
+      <div class="label">苦手なもの</div>
+      <input type="text" id="p_dislike">
+
+      <div class="label">今のお仕事</div>
+      <input type="text" id="p_job">
+
+      <div class="label">やってみたいこと</div>
+      <input type="text" id="p_future">
+
+      <div class="label">今の質問</div>
+      <textarea id="p_question"></textarea>
+
+      <button onclick="saveProfile()">
+        保存する
+      </button>
+
+      <button onclick="copyProfilePrompt()">
+        🌈 AI用をコピー
+      </button>
+
+    </div>
+
+    <button class="back-btn" onclick="showPage('homePage')">
+      戻る
+    </button>
+
+  </section>
+
+  <!-- プロンプト -->
+  <section id="promptPage" class="page">
+
+    <h1>✨ プロンプト</h1>
+
+    <div class="card">
+
+      <button onclick="copyPrompt('money')">
+        お金
+      </button>
+
+      <button onclick="copyPrompt('love')">
+        恋愛
+      </button>
+
+      <button onclick="copyPrompt('human')">
+        人間関係
+      </button>
+
+      <button onclick="copyPrompt('work')">
+        仕事
+      </button>
+
+      <textarea
+        id="otherQuestion"
+        placeholder="その他の質問を書いてね😊"
+      ></textarea>
+
+      <button onclick="copyOtherPrompt()">
+        その他をコピー
+      </button>
+
+    </div>
+
+    <button class="back-btn" onclick="showPage('homePage')">
+      戻る
+    </button>
+
+  </section>
+
+  <!-- 引き方 -->
   <section id="spreadPage" class="page">
+
     <h1>🌈 引き方を選んでね</h1>
 
-    <button onclick="drawCards(1,'しあわせスイッチワン')">しあわせスイッチワン</button>
-    <button onclick="drawCards(3,'しあわせスイッチスリー')">しあわせスイッチスリー</button>
-    <button onclick="drawCards(5,'しあわせスイッチファイブ')">しあわせスイッチファイブ</button>
-    <button onclick="drawCards(7,'しあわせスイッチセブン')">しあわせスイッチセブン</button>
-    <button onclick="drawChoice()">💫 しあわせスイッチセレクト</button>
+    <button onclick="drawCards(1,'しあわせスイッチワン')">
+      しあわせスイッチワン
+    </button>
 
-    <button class="back" onclick="showPage('homePage')">表紙にもどる</button>
+    <button onclick="drawCards(3,'しあわせスイッチスリー')">
+      しあわせスイッチスリー
+    </button>
+
+    <button onclick="drawCards(5,'しあわせスイッチファイブ')">
+      しあわせスイッチファイブ
+    </button>
+
+    <button onclick="drawCards(7,'しあわせスイッチセブン')">
+      しあわせスイッチセブン
+    </button>
+
+    <button onclick="drawChoice()">
+      💫 しあわせスイッチセレクト
+    </button>
+
+    <button class="back-btn" onclick="showPage('homePage')">
+      戻る
+    </button>
+
   </section>
 
+  <!-- 結果 -->
   <section id="resultPage" class="page">
+
     <h1 id="resultTitle"></h1>
-    <div id="cardsArea" class="cards"></div>
+
+    <div id="cardsArea" class="cards-area"></div>
+
     <textarea id="resultText" readonly></textarea>
 
-    <button onclick="copyResult()">結果をコピー</button>
-    <button class="back" onclick="showPage('spreadPage')">もどる</button>
+    <button onclick="copyResult()">
+      結果をコピー
+    </button>
+
+    <button class="back-btn" onclick="showPage('spreadPage')">
+      戻る
+    </button>
+
   </section>
 
 </main>
 
 <script src="main.js"></script>
+
 </body>
 </html>
