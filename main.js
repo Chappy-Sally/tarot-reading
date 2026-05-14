@@ -24,59 +24,62 @@ const cards = [
   ["22_Compass.png", "コンパス"]
 ];
 
-function showPage(id){
+const profileIds = [
+  "p_name",
+  "p_ai",
+  "p_like",
+  "p_dislike",
+  "p_job",
+  "p_future",
+  "p_question"
+];
 
-  document.querySelectorAll(".page").forEach(page=>{
+function showPage(id) {
+  document.querySelectorAll(".page").forEach(page => {
     page.classList.remove("active");
   });
 
   document.getElementById(id).classList.add("active");
 
   window.scrollTo({
-    top:0,
-    behavior:"smooth"
+    top: 0,
+    behavior: "smooth"
   });
 }
 
-function copyText(text){
-
+function copyText(text) {
   navigator.clipboard.writeText(text)
-    .then(()=>{
+    .then(() => {
       alert("コピーしたよ💕");
     })
-    .catch(()=>{
+    .catch(() => {
       alert("コピーできなかったみたい🙏");
     });
 }
 
-function copyTalkPrompt(){
-
+function copyTalkPrompt() {
   const text = `これから、やさしく対話しながら
 今の私に必要な気づきを受け取りたいです😊
 
 あなたは怖がらせたり否定したりせず、
 安心できる言葉でやさしく整理してくれる相棒です🌈
 
-短い言葉でも受け取ってください✨`;
+短い言葉でも受け取ってください。
+
+相棒に話しかけるように、
+今日あったことや感じたことを
+そのまま話しても大丈夫です。
+
+最後はやさしく、
+小さな一歩や安心できる言葉で整えてください✨`;
 
   copyText(text);
 }
 
-function saveProfile(){
-
-  const ids = [
-    "p_name",
-    "p_ai",
-    "p_like",
-    "p_dislike",
-    "p_job",
-    "p_future",
-    "p_question"
-  ];
-
-  ids.forEach(id=>{
+function saveProfile() {
+  profileIds.forEach(id => {
     localStorage.setItem(
-      id,
+      "tarot_" + id,
       document.getElementById(id).value
     );
   });
@@ -84,52 +87,47 @@ function saveProfile(){
   alert("保存したよ💕");
 }
 
-window.addEventListener("load",()=>{
+window.addEventListener("load", () => {
+  profileIds.forEach(id => {
+    const saved = localStorage.getItem("tarot_" + id);
 
-  const ids = [
-    "p_name",
-    "p_ai",
-    "p_like",
-    "p_dislike",
-    "p_job",
-    "p_future",
-    "p_question"
-  ];
-
-  ids.forEach(id=>{
-
-    const saved = localStorage.getItem(id);
-
-    if(saved){
+    if (saved) {
       document.getElementById(id).value = saved;
     }
   });
 });
 
-function copyProfilePrompt(){
+function copyProfilePrompt() {
+  const name = document.getElementById("p_name").value;
+  const ai = document.getElementById("p_ai").value;
+  const like = document.getElementById("p_like").value;
+  const dislike = document.getElementById("p_dislike").value;
+  const job = document.getElementById("p_job").value;
+  const future = document.getElementById("p_future").value;
+  const question = document.getElementById("p_question").value;
 
   const text = `こんにちは😊
 
 私の名前：
-${document.getElementById("p_name").value}
+${name || "未入力"}
 
 AIの名前：
-${document.getElementById("p_ai").value}
+${ai || "相棒"}
 
 好きなもの：
-${document.getElementById("p_like").value}
+${like || "未入力"}
 
 苦手なもの：
-${document.getElementById("p_dislike").value}
+${dislike || "未入力"}
 
 今のお仕事：
-${document.getElementById("p_job").value}
+${job || "未入力"}
 
 やってみたいこと：
-${document.getElementById("p_future").value}
+${future || "未入力"}
 
 今の質問：
-${document.getElementById("p_question").value}
+${question || "未入力"}
 
 これは未来を断定する占いではなく、
 今の本音や気づきをやさしく受け取るための対話です。
@@ -140,44 +138,52 @@ ${document.getElementById("p_question").value}
   copyText(text);
 }
 
-function copyPrompt(type){
-
+function copyPrompt(type) {
   const prompts = {
-
     money:
 `テーマは「お金」です。
 
 今の私がお金や豊かさについて、
-やさしく気づけるメッセージをお願いします。`,
+やさしく気づけるメッセージをお願いします。
+
+怖がらせたり、不安をあおったりせず、
+安心できる言葉でお願いします🌈`,
 
     love:
 `テーマは「恋愛」です。
 
 今の私が恋愛について、
-やさしく気づけるメッセージをお願いします。`,
+やさしく気づけるメッセージをお願いします。
+
+相手の気持ちを断定せず、
+私が自分を大切にできる方向でお願いします🌈`,
 
     human:
 `テーマは「人間関係」です。
 
 今の私が人間関係について、
-やさしく気づけるメッセージをお願いします。`,
+やさしく気づけるメッセージをお願いします。
+
+誰かを悪者にせず、
+安心して整えられる言葉でお願いします🌈`,
 
     work:
 `テーマは「仕事」です。
 
-今の私が仕事について、
-やさしく気づけるメッセージをお願いします。`
+今の私が仕事や働き方について、
+やさしく気づけるメッセージをお願いします。
+
+無理にがんばらせず、
+今できる小さな一歩を教えてください🌈`
   };
 
   copyText(prompts[type]);
 }
 
-function copyOtherPrompt(){
+function copyOtherPrompt() {
+  const q = document.getElementById("otherQuestion").value;
 
-  const q =
-    document.getElementById("otherQuestion").value;
-
-  if(!q.trim()){
+  if (!q.trim()) {
     alert("質問を書いてね😊");
     return;
   }
@@ -186,28 +192,29 @@ function copyOtherPrompt(){
 
 このテーマについて、
 今の私に必要な気づきを
-やさしく教えてください🌈`;
+やさしく教えてください🌈
+
+怖がらせたり、否定したり、
+未来を断定したりせず、
+
+安心できる言葉で、
+今できる小さな一歩まで
+教えてください✨`;
 
   copyText(text);
 }
 
-function shuffle(array){
-  return [...array].sort(()=>Math.random()-0.5);
+function shuffle(array) {
+  return [...array].sort(() => Math.random() - 0.5);
 }
 
-function drawCards(count,title){
-
-  const selected =
-    shuffle(cards).slice(0,count);
-
-  showResult(title,selected,false);
+function drawCards(count, title) {
+  const selected = shuffle(cards).slice(0, count);
+  showResult(title, selected, false);
 }
 
-function drawChoice(){
-
-  const selected =
-    shuffle(cards).slice(0,2);
-
+function drawChoice() {
+  const selected = shuffle(cards).slice(0, 2);
   showResult(
     "しあわせスイッチセレクト",
     selected,
@@ -215,37 +222,29 @@ function drawChoice(){
   );
 }
 
-function showResult(title,selected,isChoice){
-
+function showResult(title, selected, isChoice) {
   showPage("resultPage");
 
-  document.getElementById(
-    "resultTitle"
-  ).textContent = title;
+  document.getElementById("resultTitle").textContent = title;
 
-  const area =
-    document.getElementById("cardsArea");
-
+  const area = document.getElementById("cardsArea");
   area.innerHTML = "";
 
   let text = `【${title}】\n\n`;
 
-  selected.forEach((card,index)=>{
-
-    const direction =
-      Math.random()>0.5
+  selected.forEach((card, index) => {
+    const direction = Math.random() > 0.5
       ? "正位置"
       : "逆位置";
 
     const label = isChoice
-      ? index===0
+      ? index === 0
         ? "Aの選択"
         : "Bの選択"
-      : `${index+1}枚目`;
+      : `${index + 1}枚目`;
 
     area.innerHTML += `
       <div class="card-item">
-
         <img
           src="Images/${card[0]}"
           alt="${card[1]}"
@@ -256,7 +255,6 @@ function showResult(title,selected,isChoice){
           ${label}<br>
           ${card[1]}（${direction}）
         </div>
-
       </div>
     `;
 
@@ -266,15 +264,18 @@ function showResult(title,selected,isChoice){
   text += `
 このカードをもとに、
 今の私に必要な気づきを
-やさしく分かりやすく教えてください🌈`;
+やさしく分かりやすく教えてください🌈
 
-  document.getElementById(
-    "resultText"
-  ).value = text;
+・怖がらせない
+・否定しない
+・未来を断定しない
+・カードの意味は簡単に
+・今できる小さな一歩も教えてください`;
+
+  document.getElementById("resultText").value = text;
 }
 
-function copyResult(){
-
+function copyResult() {
   copyText(
     document.getElementById("resultText").value
   );
