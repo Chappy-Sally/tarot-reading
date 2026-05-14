@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>チャッピー＆サリーの私に戻るタロット</title>
 
 <style>
-
 body{
   margin:0;
   padding:20px 14px 40px;
@@ -24,9 +22,18 @@ body{
 
 h1{
   color:#6946d8;
-  font-size:30px;
-  margin-bottom:24px;
-  line-height:1.5;
+  font-size:28px;
+  margin-bottom:22px;
+}
+
+.desc{
+  background:#fff;
+  border-radius:22px;
+  padding:14px;
+  margin:10px 0 18px;
+  line-height:1.8;
+  font-size:15px;
+  color:#7b5b39;
 }
 
 .spread-grid{
@@ -40,39 +47,19 @@ button{
   border:none;
   border-radius:28px;
   padding:15px 10px;
-  font-size:16px;
+  font-size:15px;
   color:white;
   cursor:pointer;
+  background:linear-gradient(135deg,#f6a6c8,#ec8fc0);
   box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
 
-.btn-pink{
-  background:linear-gradient(135deg,#f6a6c8,#ec8fc0);
-}
-
-.btn-purple{
+.back{
   background:linear-gradient(135deg,#b8a3ff,#9aa9ff);
 }
 
 .hidden{
   display:none;
-}
-
-.copy-box{
-  margin-top:26px;
-}
-
-.copy-btn,
-.back-btn{
-  width:100%;
-  max-width:320px;
-  margin-top:12px;
-}
-
-/* 共通カード */
-
-.card{
-  text-align:center;
 }
 
 .card img{
@@ -81,166 +68,202 @@ button{
   display:block;
 }
 
-.card-title{
-  font-size:15px;
-  margin-bottom:8px;
-  color:#6946d8;
-  font-weight:bold;
-  line-height:1.4;
-}
-
-.card-name{
-  margin-top:8px;
-  font-size:14px;
-  line-height:1.5;
-}
-
 .reversed{
   transform:rotate(180deg);
 }
 
-/* 1枚 */
+.card-title{
+  color:#6946d8;
+  font-weight:bold;
+  font-size:13px;
+  margin-bottom:6px;
+}
+
+.card-name{
+  font-size:12px;
+  line-height:1.5;
+  margin-top:6px;
+}
 
 .one-layout{
   max-width:180px;
   margin:0 auto;
 }
 
-/* 3枚 */
-
-.three-layout{
+.three-layout,
+.seven-layout{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:12px;
-  align-items:start;
 }
-
-/* 5枚 */
 
 .five-layout{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:12px;
-  align-items:start;
 }
 
-.five-layout .card:nth-child(1){
-  grid-column:1;
-}
+.five-layout .card:nth-child(1){grid-column:1;}
+.five-layout .card:nth-child(2){grid-column:3;}
+.five-layout .card:nth-child(3){grid-column:2;}
+.five-layout .card:nth-child(4){grid-column:1;}
+.five-layout .card:nth-child(5){grid-column:3;}
 
-.five-layout .card:nth-child(2){
-  grid-column:3;
-}
+.seven-layout .card:nth-child(4){grid-column:2;}
 
-.five-layout .card:nth-child(3){
-  grid-column:2;
-}
-
-.five-layout .card:nth-child(4){
-  grid-column:1;
-}
-
-.five-layout .card:nth-child(5){
-  grid-column:3;
-}
-
-/* 7枚 */
-
-.seven-layout{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-  align-items:start;
-}
-
-.seven-layout .card:nth-child(4){
-  grid-column:2;
+.copy-btn{
+  width:100%;
+  max-width:320px;
+  margin-top:24px;
 }
 
 @media(max-width:480px){
-
-  h1{
-    font-size:25px;
-  }
-
-  button{
-    font-size:14px;
-    padding:14px 8px;
-  }
-
-  .card-title{
-    font-size:13px;
-  }
-
-  .card-name{
-    font-size:12px;
-  }
-
+  h1{font-size:25px;}
+  button{font-size:13px;}
 }
-
 </style>
 </head>
 
 <body>
-
 <div class="wrap">
 
-<h1>🌈 引き方を選んでね</h1>
+<div id="menu">
+  <h1>🌈 引き方を選んでね</h1>
 
-<div class="spread-grid">
+  <div class="desc">
+    1枚：今のメッセージ<br>
+    3枚：過去・現状・未来<br>
+    5枚：心の奥までやさしく整理<br>
+    7枚：流れを少し深く見る<br>
+    セレクト：AかBで迷った時に
+  </div>
 
-<button class="btn-pink"
-onclick="drawCards(1,'one')">
-しあわせスイッチワン
-</button>
-
-<button class="btn-pink"
-onclick="drawCards(3,'three')">
-しあわせスイッチスリー
-</button>
-
-<button class="btn-pink"
-onclick="drawCards(5,'five')">
-しあわせスイッチファイブ
-</button>
-
-<button class="btn-pink"
-onclick="drawCards(7,'seven')">
-しあわせスイッチセブン
-</button>
-
-<button class="btn-pink"
-onclick="drawChoice()">
-しあわせスイッチセレクト
-</button>
-
-<button class="btn-purple"
-onclick="location.href='index.html'">
-戻る
-</button>
-
+  <div class="spread-grid">
+    <button onclick="drawCards('one')">しあわせスイッチワン</button>
+    <button onclick="drawCards('three')">しあわせスイッチスリー</button>
+    <button onclick="drawCards('five')">しあわせスイッチファイブ</button>
+    <button onclick="drawCards('seven')">しあわせスイッチセブン</button>
+    <button onclick="drawCards('select')">しあわせスイッチセレクト</button>
+    <button class="back" onclick="location.href='index.html'">戻る</button>
+  </div>
 </div>
 
-<div id="resultArea" class="hidden">
-
-<h1 id="spreadTitle"></h1>
-
-<div id="cardsArea"></div>
-
-<div class="copy-box">
-
-<button class="btn-pink copy-btn"
-onclick="copyResult()">
-結果をコピー🌈
-</button>
-
+<div id="result" class="hidden">
+  <h1 id="title"></h1>
+  <div id="cardsArea"></div>
+  <button class="copy-btn" onclick="copyResult()">結果をコピー🌈</button>
+  <button class="copy-btn back" onclick="backMenu()">戻る</button>
 </div>
 
 </div>
 
-</div>
+<script>
+const cards = [
+["00_The_Fool.png","愚者"],
+["01_The_Magician.png","魔術師"],
+["02_The_High_Priestess.png","女教皇"],
+["03_The_Empress.png","女帝"],
+["04_The_Emperor.png","皇帝"],
+["05_The_Hierophant.png","教皇"],
+["06_The_Lovers.png","恋人"],
+["07_The_Chariot.png","戦車"],
+["08_Strength.png","力"],
+["09_The_Hermit.png","隠者"],
+["10_Wheel_of_Fortune.png","運命の輪"],
+["11_Justice.png","正義"],
+["12_The_Hanged_Man.png","吊るされた男"],
+["13_Death.png","死神"],
+["14_Temperance.png","節制"],
+["15_The_Devil.png","悪魔"],
+["16_The_Tower.png","塔"],
+["17_The_Star.png","星"],
+["18_The_Moon.png","月"],
+["19_The_Sun.png","太陽"],
+["20_Judgement.png","審判"],
+["21_The_World.png","世界"],
+["22_Compass.png","コンパス"]
+];
 
-<script src="main.js"></script>
+const spreads = {
+  one:{
+    title:"しあわせスイッチワン",
+    layout:"one-layout",
+    labels:["今のメッセージ"]
+  },
+  three:{
+    title:"しあわせスイッチスリー",
+    layout:"three-layout",
+    labels:["過去","現状","未来"]
+  },
+  five:{
+    title:"しあわせスイッチファイブ",
+    layout:"five-layout",
+    labels:["心の奥","気づいてない思い","今の私","今必要なこと","やさしい未来"]
+  },
+  seven:{
+    title:"しあわせスイッチセブン",
+    layout:"seven-layout",
+    labels:["過去","現状","未来","今のテーマ","気づき","ヒント","スイッチON"]
+  },
+  select:{
+    title:"しあわせスイッチセレクト",
+    layout:"three-layout",
+    labels:["Aの選択","Bの選択"]
+  }
+};
+
+let resultText = "";
+
+function shuffle(array){
+  return [...array].sort(()=>Math.random()-0.5);
+}
+
+function drawCards(type){
+  const spread = spreads[type];
+  const selected = shuffle(cards).slice(0, spread.labels.length);
+
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+  document.getElementById("title").textContent = spread.title;
+
+  const area = document.getElementById("cardsArea");
+  area.className = spread.layout;
+  area.innerHTML = "";
+
+  resultText = `【${spread.title}】\n\n`;
+
+  selected.forEach((card,index)=>{
+    const direction = Math.random() > 0.5 ? "正位置" : "逆位置";
+    const reverseClass = direction === "逆位置" ? "reversed" : "";
+    const label = spread.labels[index];
+
+    area.innerHTML += `
+      <div class="card">
+        <div class="card-title">${label}</div>
+        <img src="Images/${card[0]}" class="${reverseClass}" alt="${card[1]}">
+        <div class="card-name">${card[1]}（${direction}）</div>
+      </div>
+    `;
+
+    resultText += `${label}：${card[1]}（${direction}）\n`;
+  });
+
+  resultText += `\nこのカードをもとに、今の私に必要なことだけを、やさしく短く教えてください🌈`;
+
+  window.scrollTo(0,0);
+}
+
+function copyResult(){
+  navigator.clipboard.writeText(resultText);
+  alert("コピーしたよ🌈");
+}
+
+function backMenu(){
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("menu").classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+</script>
 
 </body>
 </html>
