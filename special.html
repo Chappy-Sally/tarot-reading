@@ -29,11 +29,15 @@ h1{
 }
 
 button{
-  width:100%;
+  width:90%;
+  max-width:320px;
+  margin:0 auto;
+  display:block;
   border:none;
   border-radius:30px;
   padding:16px 12px;
   font-size:17px;
+  font-weight:bold;
   color:white;
   cursor:pointer;
   background:linear-gradient(135deg,#f6a6c8,#ec8fc0);
@@ -55,8 +59,7 @@ button{
 }
 
 .copy-btn{
-  max-width:320px;
-  margin:16px auto 0;
+  margin-top:16px;
 }
 
 .hidden{
@@ -81,7 +84,7 @@ button{
   background:white;
   border-radius:24px;
   padding:18px 16px;
-  margin:16px auto 26px;
+  margin:16px auto 18px;
   max-width:480px;
   color:#df5d97;
   font-size:17px;
@@ -89,6 +92,14 @@ button{
   line-height:1.9;
   box-shadow:0 4px 12px rgba(0,0,0,0.05);
   white-space:pre-line;
+}
+
+.ai-note{
+  max-width:480px;
+  margin:0 auto 24px;
+  color:#7b5b39;
+  font-size:14px;
+  line-height:1.8;
 }
 </style>
 </head>
@@ -132,6 +143,13 @@ onclick="location.href='tarot.html'"
 </div>
 
 <div id="specialMessage" class="special-message"></div>
+
+<div class="ai-note">
+もっと深く聞きたい時は、<br>
+結果をコピーしてAIに送ってみてね😊<br>
+「このメッセージを、今の私にわかりやすく教えて」<br>
+と聞くと受け取りやすいよ🐾
+</div>
 
 <button class="copy-btn" onclick="copyResult()">
 結果をコピー🌈
@@ -224,7 +242,10 @@ function drawSpecial(){
 
 ${card[1]}
 
-${card[2]}`;
+${card[2]}
+
+このメッセージを、今の私にわかりやすくやさしく教えてください🌈
+決めつけず、安心できる言葉で短めにお願いします😊`;
 
   window.scrollTo(0,0);
 }
