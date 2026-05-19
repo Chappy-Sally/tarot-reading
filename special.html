@@ -7,7 +7,6 @@
 <title>しあわせスイッチスペシャル</title>
 
 <style>
-
 body{
   margin:0;
   padding:20px 14px 40px;
@@ -47,7 +46,7 @@ button{
 
 .card{
   max-width:260px;
-  margin:0 auto 24px;
+  margin:0 auto 18px;
 }
 
 .card img{
@@ -73,11 +72,24 @@ button{
 
 .card-name{
   margin-top:10px;
-  font-size:15px;
+  font-size:16px;
   font-weight:bold;
   color:#6946d8;
 }
 
+.special-message{
+  background:white;
+  border-radius:24px;
+  padding:18px 16px;
+  margin:16px auto 26px;
+  max-width:480px;
+  color:#df5d97;
+  font-size:17px;
+  font-weight:bold;
+  line-height:1.9;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  white-space:pre-line;
+}
 </style>
 </head>
 
@@ -119,6 +131,8 @@ onclick="location.href='tarot.html'"
   <div id="cardName" class="card-name"></div>
 </div>
 
+<div id="specialMessage" class="special-message"></div>
+
 <button class="copy-btn" onclick="copyResult()">
 結果をコピー🌈
 </button>
@@ -135,75 +149,96 @@ onclick="backMenu()"
 </div>
 
 <script>
-
 const cards = [
-
-["cs_compass.png","羅針盤"],
-["cs_heart_compass.png","心の声"],
-["cs_miracle.png","流れの切り替わり"],
-["cs_reset.png","手放し・整え直す"],
-["cs_universe.png","宇宙応援タイム"],
-["cs_lucky.png","軽い追い風"],
-["cs_shine.png","自分らしく輝く"],
-["cs_release.png","力を抜く・ゆるむ"],
-["cs_peace.png","安心・守られてる"],
-["cs_rest.png","休む・整える"],
-["cs_bloom.png","花開く・やさしく成長"]
-
+  [
+    "cs_compass.png",
+    "羅針盤",
+    "今のあなたに必要な方向は、もう心の奥が知っているよ😊\n焦らず、いちばん安心する方へ進んでね🧭"
+  ],
+  [
+    "cs_heart_compass.png",
+    "心の声",
+    "本音は、もうちゃんと知っているよ💗\n今日はその小さな声を、少しだけ信じてみてね😊"
+  ],
+  [
+    "cs_miracle.png",
+    "流れの切り替わり",
+    "見えないところで、流れがふわっと切り替わっているよ✨\n小さな変化を受け取る準備をしてね🌈"
+  ],
+  [
+    "cs_reset.png",
+    "手放し・整え直す",
+    "いったん深呼吸して大丈夫🌿\n今までのやり方を少しゆるめて、整え直してみてね😊"
+  ],
+  [
+    "cs_universe.png",
+    "宇宙応援タイム",
+    "大丈夫🌌\n見えないところでも、あなたを応援する流れはちゃんと動いているよ✨"
+  ],
+  [
+    "cs_lucky.png",
+    "軽い追い風",
+    "今日は軽く動いた先に、うれしい追い風がありそう🍀\n完璧じゃなくていいから、ふわっと進んでみてね😊"
+  ],
+  [
+    "cs_shine.png",
+    "自分らしく輝く",
+    "あなたの光は、ちゃんと届いているよ☀️\n無理に大きく見せなくても、そのままで十分すてき😊"
+  ],
+  [
+    "cs_release.png",
+    "力を抜く・ゆるむ",
+    "ちゃんとしなきゃを、少しお休みしていいよ🫧\n力を抜いた時に、やさしい流れが戻ってくるよ🌿"
+  ],
+  [
+    "cs_peace.png",
+    "安心・守られてる",
+    "今は安心して大丈夫🕊\n見えないやさしさに包まれながら、ゆっくり進んでね🐾"
+  ],
+  [
+    "cs_rest.png",
+    "休む・整える",
+    "休むことも、大切な前進だよ🌙\n今日は自分を責めずに、やさしく整える時間にしてね😊"
+  ],
+  [
+    "cs_bloom.png",
+    "花開く・やさしく成長",
+    "ちゃんと育っているよ🌸\n今すぐ咲かなくても大丈夫。あなたのペースで花開いていくよ😊"
+  ]
 ];
 
 let resultText = "";
 
 function drawSpecial(){
+  const card = cards[Math.floor(Math.random() * cards.length)];
 
-  const card =
-    cards[Math.floor(Math.random()*cards.length)];
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
 
-  document.getElementById("menu")
-    .classList.add("hidden");
-
-  document.getElementById("result")
-    .classList.remove("hidden");
-
-  document.getElementById("cardImage").src =
-    "Images/" + card[0];
-
-  document.getElementById("cardName").textContent =
-    card[1];
+  document.getElementById("cardImage").src = "Images/" + card[0];
+  document.getElementById("cardName").textContent = card[1];
+  document.getElementById("specialMessage").textContent = card[2];
 
   resultText =
 `【しあわせスイッチスペシャル】
 
 ${card[1]}
 
-このカードをもとに、
-今の私に必要なことだけを
-やさしく短く教えてください🌈`;
+${card[2]}`;
 
   window.scrollTo(0,0);
-
 }
 
 function copyResult(){
-
   navigator.clipboard.writeText(resultText);
-
   alert("コピーしたよ🌈");
-
 }
 
 function backMenu(){
-
-  document.getElementById("result")
-    .classList.add("hidden");
-
-  document.getElementById("menu")
-    .classList.remove("hidden");
-
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("menu").classList.remove("hidden");
   window.scrollTo(0,0);
-
 }
-
 </script>
 
 </body>
