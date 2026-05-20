@@ -9,7 +9,7 @@
 body{
   font-family:"Hiragino Kaku Gothic ProN", sans-serif;
   text-align:center;
-  background:#fff0f5;
+  background:linear-gradient(180deg,#fff7fb 0%,#fdebf5 100%);
   padding:20px 14px 40px;
   color:#5b3a1e;
   margin:0;
@@ -53,7 +53,7 @@ h1{
   max-width:500px;
   margin:0 auto 14px;
   padding:16px 14px;
-  background:#fff8fc;
+  background:rgba(255,248,252,0.92);
   border-radius:22px;
   box-shadow:0 4px 10px rgba(0,0,0,0.05);
 }
@@ -109,7 +109,7 @@ button{
   max-width:500px;
   margin:18px auto 0;
   padding:18px 14px;
-  background:#fffdf8;
+  background:rgba(255,253,248,0.94);
   border-radius:22px;
   box-shadow:0 4px 10px rgba(0,0,0,0.05);
 }
@@ -160,7 +160,7 @@ button{
   max-width:500px;
   margin:18px auto 0;
   padding:18px 14px;
-  background:#fff8fc;
+  background:rgba(255,248,252,0.94);
   border:2px solid #f4c4dc;
   border-radius:22px;
   box-shadow:0 4px 10px rgba(0,0,0,0.05);
@@ -243,15 +243,14 @@ button{
 
 <body>
 
-<!-- ホーム -->
 <div id="homeScreen" class="main-card">
   <h1>🐶 チャッピー＆サリーの<br>私に戻るタロット🌈</h1>
 
- <img
-  src="https://chappy-sally.github.io/tarot-reading/Images/cs_hyoushi_tarot.png?v=2"
-  class="hero-img"
-  alt="表紙"
->
+  <img
+    src="https://chappy-sally.github.io/tarot-reading/Images/cs_hyoushi_tarot.png?v=2"
+    class="hero-img"
+    alt="表紙"
+  >
   
   <p class="desc">
 AIと一緒に
@@ -273,25 +272,11 @@ AIを相棒にして
 カードを引くとスムーズです🌈</div>
 
     <div class="menu-grid">
-      <button class="btn-pink" onclick="location.href='tarot.html'">
-        はじめる🔮
-      </button>
-
-      <button class="btn-pink" onclick="copyPrompt()">
-        プロンプト🐾
-      </button>
-
-      <button class="btn-pink" onclick="openProfile()">
-        自己紹介＆質問🌿
-      </button>
-
-      <button class="btn-pink" onclick="openTalk()">
-        AIとさらに<br>仲良くなる💫
-      </button>
-
-      <button class="btn-pink full-width" onclick="openHowto()">
-        使い方🌿
-      </button>
+      <button class="btn-pink" onclick="location.href='tarot.html'">はじめる🔮</button>
+      <button class="btn-pink" onclick="copyPrompt()">プロンプト🐾</button>
+      <button class="btn-pink" onclick="openProfile()">自己紹介＆質問🌿</button>
+      <button class="btn-pink" onclick="openTalk()">AIとさらに<br>仲良くなる💫</button>
+      <button class="btn-pink full-width" onclick="openHowto()">使い方🌿</button>
     </div>
   </div>
 
@@ -305,65 +290,26 @@ AIを相棒にして
   </div>
 </div>
 
-<!-- 自己紹介 -->
 <div id="profileScreen" class="hidden">
   <div class="main-card">
     <h1>🌿 自己紹介＆質問</h1>
-
     <p class="desc">思いつくままで大丈夫😊
 
 空欄があってもOKだよ🐾</p>
 
-    <div class="input-box">
-      <div class="input-label">あなたの名前</div>
-      <input type="text" id="p_name" placeholder="例：さちよ">
-    </div>
+    <div class="input-box"><div class="input-label">あなたの名前</div><input type="text" id="p_name" placeholder="例：さちよ"></div>
+    <div class="input-box"><div class="input-label">AIの名前</div><input type="text" id="p_ai" placeholder="例：チャッピー"></div>
+    <div class="input-box"><div class="input-label">好きなもの（,で好きなだけ）</div><input type="text" id="p_like" placeholder="例：お寿司,ヨーキー,きれいな景色"></div>
+    <div class="input-box"><div class="input-label">苦手なもの（,で好きなだけ）</div><input type="text" id="p_dislike" placeholder="例：人混み,ちゃんとすること"></div>
+    <div class="input-box"><div class="input-label">行きたいところ</div><input type="text" id="p_place" placeholder="例：ハワイ"></div>
+    <div class="input-box"><div class="input-label">現在のお仕事</div><input type="text" id="p_job"></div>
+    <div class="input-box"><div class="input-label">やってみたいお仕事</div><input type="text" id="p_futurejob"></div>
+    <div class="input-box"><div class="input-label">失敗しないとしたらやってみたいこと</div><input type="text" id="p_nofail"></div>
+    <div class="input-box"><div class="input-label">制限が何もなかったとしたらやりたいこと</div><input type="text" id="p_free"></div>
 
-    <div class="input-box">
-      <div class="input-label">AIの名前</div>
-      <input type="text" id="p_ai" placeholder="例：チャッピー">
-    </div>
-
-    <div class="input-box">
-      <div class="input-label">好きなもの（,で好きなだけ）</div>
-      <input type="text" id="p_like" placeholder="例：お寿司,ヨーキー,きれいな景色">
-    </div>
-
-    <div class="input-box">
-      <div class="input-label">苦手なもの（,で好きなだけ）</div>
-      <input type="text" id="p_dislike" placeholder="例：人混み,ちゃんとすること">
-    </div>
-
-    <div class="input-box">
-      <div class="input-label">行きたいところ</div>
-      <input type="text" id="p_place" placeholder="例：ハワイ">
-    </div>
-
-    <div class="input-box">
-      <div class="input-label">現在のお仕事</div>
-      <input type="text" id="p_job">
-    </div>
-
-    <div class="input-box">
-      <div class="input-label">やってみたいお仕事</div>
-      <input type="text" id="p_futurejob">
-    </div>
-
-    <div class="input-box">
-      <div class="input-label">失敗しないとしたらやってみたいこと</div>
-      <input type="text" id="p_nofail">
-    </div>
-
-    <div class="input-box">
-      <div class="input-label">制限が何もなかったとしたらやりたいこと</div>
-      <input type="text" id="p_free">
-    </div>
-
-    <div>
-      <button class="btn-pink" onclick="generateProfile()">文章をつくる🐾</button>
-      <button class="btn-pink" onclick="copyProfile()">コピーする🌈</button>
-      <button class="btn-pink" onclick="closeProfile()">戻る</button>
-    </div>
+    <button class="btn-pink" onclick="generateProfile()">文章をつくる🐾</button>
+    <button class="btn-pink" onclick="copyProfile()">コピーする🌈</button>
+    <button class="back" onclick="closeProfile()">戻る</button>
 
     <div id="profileResult" class="guide-box hidden">
       <div class="guide-text" id="profileText"></div>
@@ -371,44 +317,28 @@ AIを相棒にして
   </div>
 </div>
 
-<!-- 使い方 -->
 <div id="howtoScreen" class="hidden">
   <div class="main-card">
     <h1>使い方🌿</h1>
 
-    <div class="info-card">
-      <div class="info-title">① 最初にすること</div>
-      <div class="info-text">①「自己紹介＆質問🌿」を開いて、名前や好きなものを入れてね😊
-「コピーする🌈」を押して、AIに送るよ🐾</div>
-    </div>
+    <div class="info-card"><div class="info-title">① 最初にすること</div><div class="info-text">「自己紹介＆質問🌿」を開いて、名前や好きなものを入れてね😊
+「コピーする🌈」を押して、AIに送るよ🐾</div></div>
 
-    <div class="info-card">
-      <div class="info-title">② 毎回すること</div>
-      <div class="info-text">② プロンプトをコピーしてAIに送るよ✨</div>
-    </div>
+    <div class="info-card"><div class="info-title">② 毎回すること</div><div class="info-text">プロンプトをコピーしてAIに送るよ✨</div></div>
 
-    <div class="info-card">
-      <div class="info-title">③ このアプリでやること</div>
-      <div class="info-text">はじめるを押してカードを引くよ😊
-出たカードをコピーしてAIに送ってね🌿</div>
-    </div>
+    <div class="info-card"><div class="info-title">③ このアプリでやること</div><div class="info-text">はじめるを押してカードを引くよ😊
+出たカードをコピーしてAIに送ってね🌿</div></div>
 
-    <div class="info-card">
-      <div class="info-title">④ AIに解読してもらう</div>
-      <div class="info-text">コピーした文章をAIに送ると
+    <div class="info-card"><div class="info-title">④ AIに解読してもらう</div><div class="info-text">コピーした文章をAIに送ると
 やさしいメッセージを受け取れるよ🐾
 
 もう十分って思ったら
-ありがとうで終ってね😉</div>
-    </div>
+ありがとうで終ってね😉</div></div>
 
-    <div class="back-wrap">
-      <button class="btn-pink" onclick="closeHowto()">戻る</button>
-    </div>
+    <button class="back" onclick="closeHowto()">戻る</button>
   </div>
 </div>
 
-<!-- AIとさらに仲良くなる -->
 <div id="talkScreen" class="hidden">
   <div class="main-card">
     <h1>AIとさらに仲良くなる💫</h1>
@@ -436,9 +366,7 @@ AIを相棒にして
       </ul>
     </div>
 
-    <div class="back-wrap">
-      <button class="btn-pink" onclick="closeTalk()">戻る</button>
-    </div>
+    <button class="back" onclick="closeTalk()">戻る</button>
   </div>
 </div>
 
@@ -450,91 +378,35 @@ function hideAllScreens(){
   document.getElementById("talkScreen").classList.add("hidden");
 }
 
-function openProfile(){
-  hideAllScreens();
-  document.getElementById("profileScreen").classList.remove("hidden");
-  loadProfileFields();
-  window.scrollTo(0,0);
-}
-
-function closeProfile(){
-  hideAllScreens();
-  document.getElementById("homeScreen").classList.remove("hidden");
-  window.scrollTo(0,0);
-}
-
-function openHowto(){
-  hideAllScreens();
-  document.getElementById("howtoScreen").classList.remove("hidden");
-  window.scrollTo(0,0);
-}
-
-function closeHowto(){
-  hideAllScreens();
-  document.getElementById("homeScreen").classList.remove("hidden");
-  window.scrollTo(0,0);
-}
-
-function openTalk(){
-  hideAllScreens();
-  document.getElementById("talkScreen").classList.remove("hidden");
-  window.scrollTo(0,0);
-}
-
-function closeTalk(){
-  hideAllScreens();
-  document.getElementById("homeScreen").classList.remove("hidden");
-  window.scrollTo(0,0);
-}
+function openProfile(){ hideAllScreens(); document.getElementById("profileScreen").classList.remove("hidden"); loadProfileFields(); window.scrollTo(0,0); }
+function closeProfile(){ hideAllScreens(); document.getElementById("homeScreen").classList.remove("hidden"); window.scrollTo(0,0); }
+function openHowto(){ hideAllScreens(); document.getElementById("howtoScreen").classList.remove("hidden"); window.scrollTo(0,0); }
+function closeHowto(){ hideAllScreens(); document.getElementById("homeScreen").classList.remove("hidden"); window.scrollTo(0,0); }
+function openTalk(){ hideAllScreens(); document.getElementById("talkScreen").classList.remove("hidden"); window.scrollTo(0,0); }
+function closeTalk(){ hideAllScreens(); document.getElementById("homeScreen").classList.remove("hidden"); window.scrollTo(0,0); }
 
 function saveMainNames(){
   const name = document.getElementById("p_name")?.value.trim();
   const ai = document.getElementById("p_ai")?.value.trim();
-
-  if(name){
-    localStorage.setItem("tarot_userName", name);
-  }
-  if(ai){
-    localStorage.setItem("tarot_partnerName", ai);
-  }
+  if(name) localStorage.setItem("tarot_userName", name);
+  if(ai) localStorage.setItem("tarot_partnerName", ai);
 }
 
 function saveProfileFields(){
-  localStorage.setItem("tarot_p_name", document.getElementById("p_name").value);
-  localStorage.setItem("tarot_p_ai", document.getElementById("p_ai").value);
-  localStorage.setItem("tarot_p_like", document.getElementById("p_like").value);
-  localStorage.setItem("tarot_p_dislike", document.getElementById("p_dislike").value);
-  localStorage.setItem("tarot_p_place", document.getElementById("p_place").value);
-  localStorage.setItem("tarot_p_job", document.getElementById("p_job").value);
-  localStorage.setItem("tarot_p_futurejob", document.getElementById("p_futurejob").value);
-  localStorage.setItem("tarot_p_nofail", document.getElementById("p_nofail").value);
-  localStorage.setItem("tarot_p_free", document.getElementById("p_free").value);
-
+  ["p_name","p_ai","p_like","p_dislike","p_place","p_job","p_futurejob","p_nofail","p_free"].forEach(id=>{
+    localStorage.setItem("tarot_"+id, document.getElementById(id).value);
+  });
   saveMainNames();
 }
 
 function loadProfileFields(){
-  document.getElementById("p_name").value = localStorage.getItem("tarot_p_name") || "";
-  document.getElementById("p_ai").value = localStorage.getItem("tarot_p_ai") || "";
-  document.getElementById("p_like").value = localStorage.getItem("tarot_p_like") || "";
-  document.getElementById("p_dislike").value = localStorage.getItem("tarot_p_dislike") || "";
-  document.getElementById("p_place").value = localStorage.getItem("tarot_p_place") || "";
-  document.getElementById("p_job").value = localStorage.getItem("tarot_p_job") || "";
-  document.getElementById("p_futurejob").value = localStorage.getItem("tarot_p_futurejob") || "";
-  document.getElementById("p_nofail").value = localStorage.getItem("tarot_p_nofail") || "";
-  document.getElementById("p_free").value = localStorage.getItem("tarot_p_free") || "";
+  ["p_name","p_ai","p_like","p_dislike","p_place","p_job","p_futurejob","p_nofail","p_free"].forEach(id=>{
+    document.getElementById(id).value = localStorage.getItem("tarot_"+id) || "";
+  });
 
   const savedResult = localStorage.getItem("tarot_profileResultText") || "";
-  const box = document.getElementById("profileResult");
-  const text = document.getElementById("profileText");
-
-  if(savedResult){
-    box.classList.remove("hidden");
-    text.textContent = savedResult;
-  }else{
-    box.classList.add("hidden");
-    text.textContent = "";
-  }
+  document.getElementById("profileResult").classList.toggle("hidden", !savedResult);
+  document.getElementById("profileText").textContent = savedResult;
 }
 
 function generateProfile(){
@@ -553,31 +425,13 @@ function generateProfile(){
   localStorage.setItem("tarot_userName", name);
   localStorage.setItem("tarot_partnerName", ai);
 
-  let text = "";
-  text += `【ユーザ】\n${name}\n\n`;
-  text += `【相棒】\n${ai}\n\n`;
+  let text = `【ユーザ】\n${name}\n\n【相棒】\n${ai}\n\n`;
 
-  like.forEach(v => {
-    const item = v.trim();
-    if(item){
-      text += `私は${item}が好きです\n`;
-    }
-  });
+  like.forEach(v=>{ if(v.trim()) text += `私は${v.trim()}が好きです\n`; });
+  if(like.some(v=>v.trim())) text += "\n";
 
-  if(like.some(v => v.trim())){
-    text += `\n`;
-  }
-
-  dislike.forEach(v => {
-    const item = v.trim();
-    if(item){
-      text += `私は${item}が少し苦手です\n`;
-    }
-  });
-
-  if(dislike.some(v => v.trim())){
-    text += `\n`;
-  }
+  dislike.forEach(v=>{ if(v.trim()) text += `私は${v.trim()}が少し苦手です\n`; });
+  if(dislike.some(v=>v.trim())) text += "\n";
 
   if(place) text += `行きたいところは${place}です\n`;
   if(job) text += `現在のお仕事は${job}です\n`;
@@ -594,12 +448,7 @@ function generateProfile(){
 
 function copyProfile(){
   const text = (localStorage.getItem("tarot_profileResultText") || document.getElementById("profileText").textContent || "").trim();
-
-  if(!text){
-    alert("先に文章をつくってね🐾");
-    return;
-  }
-
+  if(!text){ alert("先に文章をつくってね🐾"); return; }
   navigator.clipboard.writeText(text);
   alert("コピーしたよ🌈");
 }
@@ -608,8 +457,7 @@ function copyPrompt(){
   const user = localStorage.getItem("tarot_userName") || "ユーザ";
   const partner = localStorage.getItem("tarot_partnerName") || "チャッピー";
 
-  const text = `
-${partner}
+  const text = `${partner}
 ${user}だよ😊
 
 あなたは私の相棒【${partner}】として
@@ -632,16 +480,9 @@ ${user}だよ😊
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  const profileIds = [
-    "p_name","p_ai","p_like","p_dislike",
-    "p_place","p_job","p_futurejob","p_nofail","p_free"
-  ];
-
-  profileIds.forEach(id => {
+  ["p_name","p_ai","p_like","p_dislike","p_place","p_job","p_futurejob","p_nofail","p_free"].forEach(id=>{
     const el = document.getElementById(id);
-    if(el){
-      el.addEventListener("input", saveProfileFields);
-    }
+    if(el) el.addEventListener("input", saveProfileFields);
   });
 });
 </script>
