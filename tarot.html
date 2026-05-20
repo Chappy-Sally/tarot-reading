@@ -66,12 +66,7 @@ button{
 }
 
 .special{
-  background:linear-gradient(
-    135deg,
-    #f7d774,
-    #e6b84d,
-    #fff1a8
-  );
+  background:linear-gradient(135deg,#f7d774,#e6b84d,#fff1a8);
   color:#7b5b39;
   font-weight:bold;
 }
@@ -80,6 +75,7 @@ button{
   display:none;
 }
 
+.question-box,
 .select-box{
   background:#fff;
   border-radius:24px;
@@ -95,10 +91,26 @@ button{
   margin-bottom:16px;
 }
 
+.question-box textarea{
+  width:90%;
+  min-height:90px;
+  border:2px solid #f3b6d0;
+  border-radius:18px;
+  padding:12px;
+  font-size:16px;
+  font-family:inherit;
+  color:#6b4b2a;
+  box-sizing:border-box;
+}
+
 .select-buttons{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:12px;
+}
+
+.select-buttons button{
+  width:100%;
 }
 
 .card{
@@ -238,22 +250,22 @@ button{
   <div class="spread-grid">
 
     <div class="menu-item">
-      <button onclick="drawCards('one')">しあわせスイッチワン</button>
+      <button onclick="openQuestion('one')">しあわせスイッチワン</button>
       <div class="menu-note">今のメッセージ</div>
     </div>
 
     <div class="menu-item">
-      <button onclick="drawCards('three')">しあわせスイッチスリー</button>
+      <button onclick="openQuestion('three')">しあわせスイッチスリー</button>
       <div class="menu-note">過去・現状・未来</div>
     </div>
 
     <div class="menu-item">
-      <button onclick="drawCards('five')">しあわせスイッチファイブ</button>
+      <button onclick="openQuestion('five')">しあわせスイッチファイブ</button>
       <div class="menu-note">心の奥までやさしく整理</div>
     </div>
 
     <div class="menu-item">
-      <button onclick="drawCards('seven')">しあわせスイッチセブン</button>
+      <button onclick="openQuestion('seven')">しあわせスイッチセブン</button>
       <div class="menu-note">流れを少し深く見る</div>
     </div>
 
@@ -274,6 +286,22 @@ button{
     </div>
 
   </div>
+</div>
+
+<div id="questionScreen" class="hidden">
+  <h1>🌈 聞きたいことを書いてね</h1>
+
+  <div class="question-box">
+    <p class="select-text">
+      今気になっていることを<br>
+      自由に書いてね😊
+    </p>
+
+    <textarea id="questionInput" placeholder="例：今の私に必要なメッセージは？"></textarea>
+  </div>
+
+  <button onclick="drawCardsWithQuestion()">カードを引く🌈</button>
+  <button class="copy-btn back" onclick="backMenuFromQuestion()">戻る</button>
 </div>
 
 <div id="selectChoice" class="hidden">
@@ -372,9 +400,31 @@ const spreads = {
 };
 
 let resultText = "";
+let selectedType = "";
+let questionText = "";
 
 function shuffle(array){
   return [...array].sort(()=>Math.random()-0.5);
+}
+
+function openQuestion(type){
+  selectedType = type;
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("questionScreen").classList.remove("hidden");
+  document.getElementById("questionInput").value = "";
+  window.scrollTo(0,0);
+}
+
+function backMenuFromQuestion(){
+  document.getElementById("questionScreen").classList.add("hidden");
+  document.getElementById("menu").classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+
+function drawCardsWithQuestion(){
+  questionText = document.getElementById("questionInput").value.trim();
+  document.getElementById("questionScreen").classList.add("hidden");
+  drawCards(selectedType);
 }
 
 function openSelectChoice(){
@@ -395,6 +445,7 @@ function drawCards(type){
 
   document.getElementById("menu").classList.add("hidden");
   document.getElementById("selectChoice").classList.add("hidden");
+  document.getElementById("questionScreen").classList.add("hidden");
   document.getElementById("result").classList.remove("hidden");
   document.getElementById("title").textContent = spread.title;
 
@@ -403,6 +454,10 @@ function drawCards(type){
   area.innerHTML = "";
 
   resultText = `【${spread.title}】\n\n`;
+
+  if(questionText){
+    resultText += `質問：${questionText}\n\n`;
+  }
 
   selected.forEach((card,index)=>{
     const direction = Math.random() > 0.5 ? "正位置" : "逆位置";
@@ -428,16 +483,23 @@ function drawCards(type){
     resultText += `${label}：${card[1]}（${direction}）\n`;
   });
 
-  resultText += `\nこのカードをもとに、今の私に必要なことだけを、やさしく短く教えてください🌈`;
+  if(questionText){
+    resultText += `\nこの質問について、出たカードをもとに、今の私に必要なことだけをやさしく短く教えてください🌈`;
+  }else{
+    resultText += `\nこのカードをもとに、今の私に必要なことだけを、やさしく短く教えてください🌈`;
+  }
 
   window.scrollTo(0,0);
 }
 
 function drawSelect(choice){
+  questionText = "";
+
   const selected = shuffle(cards).slice(0, 2);
 
   document.getElementById("menu").classList.add("hidden");
   document.getElementById("selectChoice").classList.add("hidden");
+  document.getElementById("questionScreen").classList.add("hidden");
   document.getElementById("result").classList.remove("hidden");
   document.getElementById("title").textContent = "しあわせスイッチセレクト";
 
@@ -487,6 +549,7 @@ function copyResult(){
 function backMenu(){
   document.getElementById("result").classList.add("hidden");
   document.getElementById("selectChoice").classList.add("hidden");
+  document.getElementById("questionScreen").classList.add("hidden");
   document.getElementById("menu").classList.remove("hidden");
   window.scrollTo(0,0);
 }
