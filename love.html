@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>チャッピー＆サリーの相性占いメニュー</title>
+
+<style>
+body{
+  font-family:"Hiragino Kaku Gothic ProN", sans-serif;
+  text-align:center;
+  background:linear-gradient(180deg,#fff7fb 0%,#f3e9ff 100%);
+  padding:20px 14px 40px;
+  color:#5b3a1e;
+  margin:0;
+}
+
+.main-card{
+  width:92%;
+  max-width:620px;
+  margin:0 auto;
+  background:linear-gradient(180deg,rgba(255,248,252,0.96),rgba(248,239,255,0.94));
+  border-radius:28px;
+  padding:24px 16px 28px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+
+h1{
+  font-size:28px;
+  line-height:1.4;
+  margin:0 0 14px;
+  color:#7a4fcf;
+}
+
+.hero-img{
+  width:90%;
+  max-width:460px;
+  border-radius:22px;
+  margin:16px 0 20px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.12);
+}
+
+.desc{
+  font-size:17px;
+  line-height:1.9;
+  margin:0 0 22px;
+  color:#7b5b39;
+  white-space:pre-line;
+}
+
+.menu-card{
+  width:92%;
+  max-width:500px;
+  margin:18px auto 0;
+  padding:22px 14px;
+  background:rgba(255,255,255,0.76);
+  border-radius:26px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.06);
+}
+
+button{
+  width:90%;
+  max-width:360px;
+  margin:0 auto 16px;
+  display:block;
+  border:none;
+  border-radius:30px;
+  padding:17px 12px;
+  font-size:18px;
+  font-weight:bold;
+  color:white;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.btn-love{
+  background:linear-gradient(135deg,#f6a6c8,#ec8fc0);
+}
+
+.btn-purple{
+  background:linear-gradient(135deg,#c8a8ff,#9aa9ff);
+}
+
+.btn-gold{
+  background:linear-gradient(135deg,#f7cf58,#fff1a8);
+  color:#6b4b2a;
+}
+
+.back{
+  background:linear-gradient(135deg,#b8a3ff,#9aa9ff);
+  font-weight:900;
+}
+
+.caption{
+  font-size:15px;
+  line-height:1.7;
+  color:#d45f9d;
+  font-weight:bold;
+  margin:-6px 0 18px;
+}
+
+@media (max-width:480px){
+  h1{
+    font-size:25px;
+  }
+
+  .desc{
+    font-size:15px;
+  }
+
+  button{
+    font-size:16px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="main-card">
+  <h1>💕 チャッピー＆サリーの<br>相性占いメニュー 🌈</h1>
+
+  <img
+    src="Images/cs_lovely_tarot_1.png"
+    class="hero-img"
+    alt="相性占い表紙"
+  >
+
+  <p class="desc">今のふたりに必要なメッセージを
+やさしく受け取る相性占いです😊
+
+当てるためではなく
+ふたりの心をやさしく整えるために
+カードを引いてね💕</p>
+
+  <div class="menu-card">
+    <button class="btn-love" onclick="location.href='love-one.html'">💕 1枚引き</button>
+    <div class="caption">今のふたりへのメッセージ</div>
+
+    <button class="btn-purple" onclick="location.href='love-three.html'">💜 3枚引き</button>
+    <div class="caption">自分・相手・ふたりの流れ</div>
+
+    <button class="btn-gold" onclick="location.href='love-special.html'">✨ スペシャルカード</button>
+    <div class="caption">今のふたりに必要な特別メッセージ</div>
+
+    <button class="back" onclick="location.href='index.html'">HOMEへ戻る</button>
+  </div>
+</div>
+
+</body>
+</html>
