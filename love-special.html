@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>相性占いスペシャル</title>
+
+<style>
+body{
+  margin:0;
+  padding:20px 14px 40px;
+  background:#fff5fb;
+  font-family:"Hiragino Kaku Gothic ProN",sans-serif;
+  text-align:center;
+  color:#6b4b2a;
+}
+
+.wrap{
+  max-width:620px;
+  margin:0 auto;
+}
+
+h1{
+  color:#8a58e6;
+  font-size:30px;
+  line-height:1.5;
+  margin-bottom:24px;
+}
+
+button{
+  width:90%;
+  max-width:320px;
+  margin:0 auto;
+  display:block;
+  border:none;
+  border-radius:30px;
+  padding:16px 12px;
+  font-size:17px;
+  font-weight:bold;
+  color:white;
+  cursor:pointer;
+  background:linear-gradient(135deg,#f6a6c8,#ec8fc0);
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.back{
+  background:linear-gradient(135deg,#b8a3ff,#9aa9ff);
+}
+
+.card{
+  max-width:260px;
+  margin:0 auto 18px;
+}
+
+.card img{
+  width:100%;
+  border-radius:18px;
+}
+
+.copy-btn{
+  margin-top:16px;
+}
+
+.hidden{
+  display:none;
+}
+
+.message{
+  margin:18px 0 28px;
+  color:#df5d97;
+  line-height:1.8;
+  font-size:15px;
+}
+
+.card-name{
+  margin-top:10px;
+  font-size:16px;
+  font-weight:bold;
+  color:#6946d8;
+}
+
+.special-message{
+  background:white;
+  border-radius:24px;
+  padding:18px 16px;
+  margin:16px auto 18px;
+  max-width:480px;
+  color:#df5d97;
+  font-size:17px;
+  font-weight:bold;
+  line-height:1.9;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+  white-space:pre-line;
+}
+
+.ai-note{
+  max-width:480px;
+  margin:0 auto 24px;
+  color:#7b5b39;
+  font-size:14px;
+  line-height:1.8;
+}
+
+.hero-img{
+  width:90%;
+  max-width:420px;
+  border-radius:24px;
+  margin-bottom:20px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.10);
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div id="menu">
+
+<h1>
+💕<br>
+しあわせスイッチスペシャル
+</h1>
+
+<img
+src="Images/cs_lovely_tarot_1.png"
+class="hero-img"
+alt="相性占い"
+>
+
+<div class="message">
+今のふたりに必要な<br>
+やさしい特別メッセージを受け取ってね😊
+</div>
+
+<button onclick="drawSpecial()">
+スペシャルカードを引く
+</button>
+
+<button
+class="copy-btn back"
+onclick="location.href='love.html'"
+>
+戻る
+</button>
+
+</div>
+
+<div id="result" class="hidden">
+
+<h1>💕 スペシャルメッセージ</h1>
+
+<div class="card">
+  <img id="cardImage">
+  <div id="cardName" class="card-name"></div>
+</div>
+
+<div id="specialMessage" class="special-message"></div>
+
+<div class="ai-note">
+もっと深く聞きたい時は、<br>
+結果をコピーしてAIに送ってみてね😊<br>
+「このメッセージを、今のふたりにわかりやすく教えて」<br>
+と聞くと受け取りやすいよ🐾
+</div>
+
+<button class="copy-btn" onclick="copyResult()">
+結果をコピー🌈
+</button>
+
+<button
+class="copy-btn back"
+onclick="backMenu()"
+>
+戻る
+</button>
+
+</div>
+
+</div>
+
+<script>
+const cards = [
+  [
+    "cs_heart_compass.png",
+    "心を近づける",
+    "無理に答えを出さなくても大丈夫😊\n今は、やさしく気持ちを伝え合う時間を大切にしてね💕"
+  ],
+  [
+    "cs_peace.png",
+    "安心の流れ",
+    "ふたりの間には、ちゃんと安心できる流れがあるよ🕊\n焦らず、やさしく進んでね🌈"
+  ],
+  [
+    "cs_bloom.png",
+    "やさしく育つ",
+    "今はゆっくり育っていくタイミング🌸\n急がなくても、ふたりの流れはちゃんと進んでいるよ😊"
+  ],
+  [
+    "cs_universe.png",
+    "宇宙応援タイム",
+    "見えないところでも、ふたりを応援する流れはちゃんと動いているよ✨\n安心して大丈夫😊"
+  ],
+  [
+    "cs_release.png",
+    "力を抜く",
+    "ちゃんとしなきゃを少しお休みしてみてね🫧\n自然体のほうが、やさしい空気が流れやすいよ💕"
+  ],
+  [
+    "cs_lucky.png",
+    "軽い追い風",
+    "ふわっと動いた先に、うれしい流れがありそう🍀\n今日は軽やかさを大切にしてみてね😊"
+  ],
+  [
+    "cs_shine.png",
+    "そのままで大丈夫",
+    "無理に変わらなくても大丈夫☀️\nふたりらしいペースを大切にしてね💕"
+  ],
+  [
+    "cs_rest.png",
+    "少し休憩",
+    "今は答えを急がなくても大丈夫🌙\n安心できる時間を増やしてみてね😊"
+  ]
+];
+
+let resultText = "";
+
+function drawSpecial(){
+  const card = cards[Math.floor(Math.random() * cards.length)];
+
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+
+  document.getElementById("cardImage").src = "Images/" + card[0];
+  document.getElementById("cardName").textContent = card[1];
+  document.getElementById("specialMessage").textContent = card[2];
+
+  resultText =
+`【相性占いスペシャル】
+
+${card[1]}
+
+${card[2]}
+
+このメッセージを、
+今のふたりにわかりやすく
+やさしく教えてください🌈
+
+決めつけず、
+安心できる言葉で
+短めにお願いします😊`;
+
+  window.scrollTo(0,0);
+}
+
+function copyResult(){
+  navigator.clipboard.writeText(resultText);
+  alert("コピーしたよ🌈");
+}
+
+function backMenu(){
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("menu").classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+</script>
+
+</body>
+</html>
