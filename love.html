@@ -86,6 +86,10 @@ button{
   color:#6b4b2a;
 }
 
+.btn-green{
+  background:linear-gradient(135deg,#8fd6b5,#7bc9d8);
+}
+
 .back{
   background:linear-gradient(135deg,#b8a3ff,#9aa9ff);
   font-weight:900;
@@ -97,6 +101,64 @@ button{
   color:#d45f9d;
   font-weight:bold;
   margin:-6px 0 18px;
+}
+
+.hidden{
+  display:none;
+}
+
+.question-card{
+  width:92%;
+  max-width:500px;
+  margin:18px auto 0;
+  padding:22px 14px;
+  background:rgba(255,255,255,0.82);
+  border-radius:26px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.06);
+}
+
+.input-box{
+  margin:16px auto;
+  text-align:left;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  color:#7a4fcf;
+  margin-bottom:8px;
+  font-size:15px;
+}
+
+.example{
+  font-size:13px;
+  color:#9a7b5d;
+  line-height:1.6;
+  margin-bottom:8px;
+}
+
+textarea{
+  width:100%;
+  min-height:74px;
+  border:2px solid #f3b6d0;
+  border-radius:18px;
+  padding:12px;
+  font-size:15px;
+  font-family:inherit;
+  color:#6b4b2a;
+  box-sizing:border-box;
+}
+
+.result-box{
+  background:#fff;
+  border-radius:22px;
+  padding:16px;
+  margin:18px auto;
+  color:#6b4b2a;
+  font-size:14px;
+  line-height:1.8;
+  white-space:pre-line;
+  text-align:left;
 }
 
 @media (max-width:480px){
@@ -117,7 +179,7 @@ button{
 
 <body>
 
-<div class="main-card">
+<div id="menuScreen" class="main-card">
   <h1>💕 チャッピー＆サリーの<br>相性占いメニュー 🌈</h1>
 
   <img
@@ -134,18 +196,119 @@ button{
 カードを引いてね💕</p>
 
   <div class="menu-card">
-    <button class="btn-love" onclick="location.href='love-tarot.html'">💕 1枚引き</button>
+    <button class="btn-love" onclick="location.href='love-tarot.html?mode=one'">💕 相性ワン</button>
     <div class="caption">今のふたりへのメッセージ</div>
 
-    <button class="btn-purple" onclick="location.href='love-tarot.html'">💜 3枚引き</button>
+    <button class="btn-purple" onclick="location.href='love-tarot.html?mode=three'">💜 相性スリー</button>
     <div class="caption">自分・相手・ふたりの流れ</div>
 
     <button class="btn-gold" onclick="location.href='love-special.html'">✨ スペシャルカード</button>
     <div class="caption">今のふたりに必要な特別メッセージ</div>
 
+    <button class="btn-green" onclick="openQuestionSheet()">🌿 ふたりの質問シート</button>
+    <div class="caption">先にAIへ送ると受け取りやすいよ</div>
+
     <button class="back" onclick="location.href='index.html'">HOMEへ戻る</button>
   </div>
 </div>
+
+<div id="questionScreen" class="hidden">
+  <div class="main-card">
+    <h1>🌿 ふたりの質問シート</h1>
+
+    <p class="desc">わかるところだけで大丈夫😊
+コピーしてAIに送ってからカード結果を送ると
+やさしく整理してもらいやすいよ💕</p>
+
+    <div class="question-card">
+
+      <div class="input-box">
+        <label>① ふたりの関係は？</label>
+        <div class="example">例）恋人、片思い、夫婦、仕事のパートナー、仲間、友だち、家族、気になる人 など</div>
+        <textarea id="q_relation"></textarea>
+      </div>
+
+      <div class="input-box">
+        <label>② 今の距離感は？</label>
+        <div class="example">例）よく話す、最近少し距離がある、連絡は少なめ、まだこれから仲良くなりたい など</div>
+        <textarea id="q_distance"></textarea>
+      </div>
+
+      <div class="input-box">
+        <label>③ 本当はどうなりたい？</label>
+        <div class="example">例）もっと仲良くなりたい、安心して関わりたい、仕事を楽しく進めたい、自然体でいたい など</div>
+        <textarea id="q_wish"></textarea>
+      </div>
+
+      <div class="input-box">
+        <label>④ 今いちばん気になっていることは？</label>
+        <div class="example">例）相手の気持ち、これからの流れ、私の接し方、距離感、言葉の伝え方 など</div>
+        <textarea id="q_worry"></textarea>
+      </div>
+
+      <button class="btn-love" onclick="makeQuestionText()">文章をつくる💕</button>
+      <button class="btn-love" onclick="copyQuestionText()">コピーする🌈</button>
+      <button class="back" onclick="backMenu()">戻る</button>
+
+      <div id="questionResult" class="result-box hidden"></div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+let questionText = "";
+
+function openQuestionSheet(){
+  document.getElementById("menuScreen").classList.add("hidden");
+  document.getElementById("questionScreen").classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+
+function backMenu(){
+  document.getElementById("questionScreen").classList.add("hidden");
+  document.getElementById("menuScreen").classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+
+function makeQuestionText(){
+  const relation = document.getElementById("q_relation").value.trim();
+  const distance = document.getElementById("q_distance").value.trim();
+  const wish = document.getElementById("q_wish").value.trim();
+  const worry = document.getElementById("q_worry").value.trim();
+
+  questionText =
+`【ふたりの質問シート】
+
+① ふたりの関係
+${relation || "未入力"}
+
+② 今の距離感
+${distance || "未入力"}
+
+③ 本当はどうなりたいか
+${wish || "未入力"}
+
+④ 今いちばん気になっていること
+${worry || "未入力"}
+
+これから相性タロットの結果を送ります。
+相手の気持ちは決めつけず、
+ふたりの心をやさしく整える感じで
+安心できる言葉で短めに教えてください😊`;
+
+  document.getElementById("questionResult").textContent = questionText;
+  document.getElementById("questionResult").classList.remove("hidden");
+}
+
+function copyQuestionText(){
+  if(!questionText){
+    makeQuestionText();
+  }
+  navigator.clipboard.writeText(questionText);
+  alert("コピーしたよ🌈");
+}
+</script>
 
 </body>
 </html>
