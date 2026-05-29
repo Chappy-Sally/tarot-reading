@@ -1,1 +1,394 @@
-love-tarot.html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>チャッピー＆サリーの相性タロット</title>
+
+<style>
+body{
+  margin:0;
+  padding:20px 14px 40px;
+  background:#fff5fb;
+  font-family:"Hiragino Kaku Gothic ProN",sans-serif;
+  text-align:center;
+  color:#6b4b2a;
+}
+
+.wrap{
+  max-width:620px;
+  margin:0 auto;
+}
+
+h1{
+  color:#8a58e6;
+  font-size:28px;
+  margin-bottom:24px;
+  line-height:1.5;
+}
+
+.hero-img{
+  width:90%;
+  max-width:420px;
+  border-radius:24px;
+  margin:0 auto 22px;
+  display:block;
+  box-shadow:0 8px 18px rgba(0,0,0,0.10);
+}
+
+.spread-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:18px;
+  margin-bottom:24px;
+}
+
+.menu-item{
+  text-align:center;
+}
+
+button{
+  width:76%;
+  max-width:340px;
+  margin:0 auto;
+  display:block;
+  border:none;
+  border-radius:30px;
+  padding:16px 12px;
+  font-size:17px;
+  font-weight:bold;
+  color:white;
+  cursor:pointer;
+  background:linear-gradient(135deg,#f6a6c8,#ec8fc0);
+  box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+.menu-note{
+  margin-top:7px;
+  font-size:14px;
+  color:#df5d97;
+  font-weight:bold;
+  line-height:1.5;
+}
+
+.back{
+  background:linear-gradient(135deg,#b8a3ff,#9aa9ff);
+}
+
+.hidden{
+  display:none;
+}
+
+.question-box{
+  background:#fff;
+  border-radius:24px;
+  padding:18px 14px;
+  margin:18px 0 24px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.05);
+}
+
+.select-text{
+  line-height:1.8;
+  color:#7b5b39;
+  font-size:15px;
+  margin-bottom:16px;
+}
+
+.question-box textarea{
+  width:90%;
+  min-height:90px;
+  border:2px solid #f3b6d0;
+  border-radius:18px;
+  padding:12px;
+  font-size:16px;
+  font-family:inherit;
+  color:#6b4b2a;
+  box-sizing:border-box;
+}
+
+.card{
+  text-align:center;
+  width:100%;
+}
+
+.card img{
+  width:100%;
+  border-radius:16px;
+  display:block;
+}
+
+.reversed{
+  transform:rotate(180deg);
+}
+
+.card-title{
+  color:#8a58e6;
+  font-weight:bold;
+  font-size:13px;
+  margin-bottom:6px;
+}
+
+.card-name{
+  font-size:12px;
+  line-height:1.5;
+  margin-top:6px;
+}
+
+.one-layout{
+  max-width:190px;
+  margin:0 auto;
+}
+
+.three-layout{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  align-items:start;
+  justify-items:center;
+}
+
+.copy-btn{
+  width:100%;
+  max-width:320px;
+  margin-top:24px;
+}
+
+.ai-note{
+  max-width:480px;
+  margin:22px auto 0;
+  color:#7b5b39;
+  font-size:14px;
+  line-height:1.8;
+}
+
+@media(max-width:480px){
+  h1{
+    font-size:25px;
+  }
+
+  button{
+    font-size:15px;
+    padding:15px 8px;
+  }
+
+  .menu-note{
+    font-size:13px;
+  }
+
+  .card-title{
+    font-size:12px;
+  }
+
+  .card-name{
+    font-size:11px;
+  }
+
+  .three-layout{
+    gap:8px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<div id="menu">
+  <h1>💕 相性占い<br>引き方を選んでね</h1>
+
+  <img
+    src="Images/cs_lovely_tarot_1.png"
+    class="hero-img"
+    alt="相性占い"
+  >
+
+  <div class="spread-grid">
+
+    <div class="menu-item">
+      <button onclick="drawCards('one')">相性ワン</button>
+      <div class="menu-note">今のふたりへのメッセージ</div>
+    </div>
+
+    <div class="menu-item">
+      <button onclick="openQuestion('three')">相性スリー</button>
+      <div class="menu-note">自分・相手・ふたりの流れ</div>
+    </div>
+
+    <div class="menu-item">
+      <button class="back" onclick="location.href='love.html'">相性メニューへ戻る</button>
+    </div>
+
+  </div>
+</div>
+
+<div id="questionScreen" class="hidden">
+  <h1>💕 聞きたいことを書いてね</h1>
+
+  <div class="question-box">
+    <p class="select-text">
+      ふたりについて<br>
+      今気になっていることを書いてね😊
+    </p>
+
+    <textarea id="questionInput" placeholder="例：今のふたりに必要なメッセージは？"></textarea>
+  </div>
+
+  <button onclick="drawCardsWithQuestion()">カードを引く💕</button>
+  <button class="copy-btn back" onclick="backMenuFromQuestion()">戻る</button>
+</div>
+
+<div id="result" class="hidden">
+  <h1 id="title"></h1>
+  <div id="cardsArea"></div>
+
+  <div class="ai-note">
+    結果をコピーしてAIに送ってね😊<br>
+    決めつけず、ふたりの心をやさしく整える感じで<br>
+    受け取るのがおすすめだよ🐾
+  </div>
+
+  <button class="copy-btn" onclick="copyResult()">結果をコピー🌈</button>
+  <button class="copy-btn back" onclick="backMenu()">戻る</button>
+</div>
+
+</div>
+
+<script>
+const cards = [
+  ["00_The_Fool.png","愚者"],
+  ["01_The_Magician.png","魔術師"],
+  ["02_The_High_Priestess.png","女教皇"],
+  ["03_The_Empress.png","女帝"],
+  ["04_The_Emperor.png","皇帝"],
+  ["05_The_Hierophant.png","教皇"],
+  ["06_The_Lovers.png","恋人"],
+  ["07_The_Chariot.png","戦車"],
+  ["08_Strength.png","力"],
+  ["09_The_Hermit.png","隠者"],
+  ["10_Wheel_of_Fortune.png","運命の輪"],
+  ["11_Justice.png","正義"],
+  ["12_The_Hanged_Man.png","吊るされた男"],
+  ["13_Death.png","死神"],
+  ["14_Temperance.png","節制"],
+  ["15_The_Devil.png","悪魔"],
+  ["16_The_Tower.png","塔"],
+  ["17_The_Star.png","星"],
+  ["18_The_Moon.png","月"],
+  ["19_The_Sun.png","太陽"],
+  ["20_Judgement.png","審判"],
+  ["21_The_World.png","世界"]
+];
+
+const spreads = {
+  one:{
+    title:"相性ワン",
+    layout:"one-layout",
+    labels:["今のふたりへのメッセージ"]
+  },
+
+  three:{
+    title:"相性スリー",
+    layout:"three-layout",
+    labels:["私の気持ち","相手の気持ち","ふたりの流れ"]
+  }
+};
+
+let resultText = "";
+let selectedType = "";
+let questionText = "";
+
+function shuffle(array){
+  return [...array].sort(()=>Math.random()-0.5);
+}
+
+function openQuestion(type){
+  selectedType = type;
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("questionScreen").classList.remove("hidden");
+  document.getElementById("questionInput").value = "";
+  window.scrollTo(0,0);
+}
+
+function backMenuFromQuestion(){
+  document.getElementById("questionScreen").classList.add("hidden");
+  document.getElementById("menu").classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+
+function drawCardsWithQuestion(){
+  questionText = document.getElementById("questionInput").value.trim();
+  document.getElementById("questionScreen").classList.add("hidden");
+  drawCards(selectedType);
+}
+
+function drawCards(type){
+  const spread = spreads[type];
+  const selected = shuffle(cards).slice(0, spread.labels.length);
+
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("questionScreen").classList.add("hidden");
+  document.getElementById("result").classList.remove("hidden");
+  document.getElementById("title").textContent = spread.title;
+
+  const area = document.getElementById("cardsArea");
+  area.className = spread.layout;
+  area.innerHTML = "";
+
+  resultText = `【${spread.title}】\n\n`;
+
+  if(questionText){
+    resultText += `質問：${questionText}\n\n`;
+  }
+
+  selected.forEach((card,index)=>{
+    const direction = Math.random() > 0.5 ? "正位置" : "逆位置";
+    const reverseClass = direction === "逆位置" ? "reversed" : "";
+    const label = spread.labels[index];
+
+    area.innerHTML += `
+      <div class="card">
+        <div class="card-title">${label}</div>
+
+        <img
+          src="Images/${card[0]}"
+          class="${reverseClass}"
+          alt="${card[1]}"
+        >
+
+        <div class="card-name">
+          ${card[1]}（${direction}）
+        </div>
+      </div>
+    `;
+
+    resultText += `${label}：${card[1]}（${direction}）\n`;
+  });
+
+  if(type === "one"){
+    resultText += `\nこのカードをもとに、今のふたりに必要なメッセージを、やさしく短く教えてください💕\n`;
+  }else{
+    resultText += `\nこの質問について、出たカードをもとに、今のふたりの流れをやさしく短く教えてください💕\n`;
+  }
+
+  resultText += `相手の気持ちは決めつけず、安心できる言葉でお願いします😊`;
+
+  questionText = "";
+  window.scrollTo(0,0);
+}
+
+function copyResult(){
+  navigator.clipboard.writeText(resultText);
+  alert("コピーしたよ🌈");
+}
+
+function backMenu(){
+  document.getElementById("result").classList.add("hidden");
+  document.getElementById("questionScreen").classList.add("hidden");
+  document.getElementById("menu").classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+</script>
+
+</body>
+</html>
