@@ -162,6 +162,7 @@ textarea{
 }
 
 @media (max-width:480px){
+
   h1{
     font-size:25px;
   }
@@ -173,6 +174,7 @@ textarea{
   button{
     font-size:16px;
   }
+
 }
 </style>
 </head>
@@ -180,6 +182,7 @@ textarea{
 <body>
 
 <div id="menuScreen" class="main-card">
+
   <h1>💕 チャッピー＆サリーの<br>相性占いメニュー 🌈</h1>
 
   <img
@@ -196,89 +199,195 @@ textarea{
 カードを引いてね💕</p>
 
   <div class="menu-card">
-    <button class="btn-green" onclick="openQuestionSheet()">🌿 ふたりの質問シート</button>
-    <div class="caption">先にAIへ送ると受け取りやすいよ</div>
 
-    <button class="btn-love" onclick="location.href='love-tarot.html?mode=one'">💕 相性ワン</button>
-    <div class="caption">今のふたりへのメッセージ</div>
+    <button class="btn-green"
+    onclick="openQuestionSheet()">
+    🌿 ふたりの質問シート
+    </button>
 
-    <button class="btn-purple" onclick="location.href='love-tarot.html?mode=three'">💜 相性スリー</button>
-    <div class="caption">自分・相手・ふたりの流れ</div>
+    <div class="caption">
+    先にAIへ送ると受け取りやすいよ
+    </div>
 
-    <button class="btn-gold" onclick="location.href='love-special.html'">✨ スペシャルカード</button>
-    <div class="caption">今のふたりに必要な特別メッセージ</div>
+    <button class="btn-love"
+    onclick="location.href='love-tarot.html?mode=one'">
+    💕 相性ワン
+    </button>
 
-    <button class="back" onclick="location.href='index.html'">HOMEへ戻る</button>
+    <div class="caption">
+    今のふたりへのメッセージ
+    </div>
+
+    <button class="btn-purple"
+    onclick="location.href='love-tarot.html?mode=three'">
+    💜 相性スリー
+    </button>
+
+    <div class="caption">
+    自分・相手・ふたりの流れ
+    </div>
+
+    <button class="btn-gold"
+    onclick="location.href='love-special.html'">
+    ✨ スペシャルカード
+    </button>
+
+    <div class="caption">
+    今のふたりに必要な特別メッセージ
+    </div>
+
+    <button class="back"
+    onclick="location.href='index.html'">
+    HOMEへ戻る
+    </button>
+
   </div>
 </div>
 
 <div id="questionScreen" class="hidden">
+
   <div class="main-card">
+
     <h1>🌿 ふたりの質問シート</h1>
 
-    <p class="desc">わかるところだけで大丈夫😊
-コピーしてAIに送ってからカード結果を送ると
-やさしく整理してもらいやすいよ💕</p>
+    <p class="desc">
+わかるところだけで大丈夫😊
+
+コピーしてAIに送ってから
+カード結果を送ると
+
+やさしく整理してもらいやすいよ💕
+    </p>
 
     <div class="question-card">
 
       <div class="input-box">
         <label>① ふたりの関係は？</label>
-        <div class="example">例）恋人、片思い、夫婦、仕事のパートナー、仲間、友だち、家族、気になる人 など</div>
+
+        <div class="example">
+例）恋人、片思い、夫婦、仕事のパートナー、
+仲間、友だち、家族、気になる人 など
+        </div>
+
         <textarea id="q_relation"></textarea>
       </div>
 
       <div class="input-box">
         <label>② 今の距離感は？</label>
-        <div class="example">例）よく話す、最近少し距離がある、連絡は少なめ、まだこれから仲良くなりたい など</div>
+
+        <div class="example">
+例）よく話す、最近少し距離がある、
+連絡は少なめ、まだこれから仲良くなりたい など
+        </div>
+
         <textarea id="q_distance"></textarea>
       </div>
 
       <div class="input-box">
         <label>③ 本当はどうなりたい？</label>
-        <div class="example">例）もっと仲良くなりたい、安心して関わりたい、仕事を楽しく進めたい、自然体でいたい など</div>
+
+        <div class="example">
+例）もっと仲良くなりたい、
+安心して関わりたい、
+仕事を楽しく進めたい、
+自然体でいたい など
+        </div>
+
         <textarea id="q_wish"></textarea>
       </div>
 
       <div class="input-box">
         <label>④ 今いちばん気になっていることは？</label>
-        <div class="example">例）相手の気持ち、これからの流れ、私の接し方、距離感、言葉の伝え方 など</div>
+
+        <div class="example">
+例）相手の気持ち、これからの流れ、
+私の接し方、距離感、言葉の伝え方 など
+        </div>
+
         <textarea id="q_worry"></textarea>
       </div>
 
-      <button class="btn-love" onclick="makeQuestionText()">文章をつくる💕</button>
-      <button class="btn-love" onclick="copyQuestionText()">コピーする🌈</button>
-      <button class="back" onclick="backMenu()">戻る</button>
+      <button class="btn-love"
+      onclick="makeQuestionText()">
+      文章をつくる💕
+      </button>
 
-      <div id="questionResult" class="result-box hidden"></div>
+      <button class="btn-love"
+      onclick="copyQuestionText()">
+      コピーする🌈
+      </button>
+
+      <button class="back"
+      onclick="backMenu()">
+      戻る
+      </button>
+
+      <div id="questionResult"
+      class="result-box hidden"></div>
 
     </div>
+
   </div>
+
 </div>
 
 <script>
+
 let questionText = "";
 
 function openQuestionSheet(){
-  document.getElementById("menuScreen").classList.add("hidden");
-  document.getElementById("questionScreen").classList.remove("hidden");
+
+  document.getElementById("menuScreen")
+  .classList.add("hidden");
+
+  document.getElementById("questionScreen")
+  .classList.remove("hidden");
+
   window.scrollTo(0,0);
 }
 
 function backMenu(){
-  document.getElementById("questionScreen").classList.add("hidden");
-  document.getElementById("menuScreen").classList.remove("hidden");
+
+  document.getElementById("questionScreen")
+  .classList.add("hidden");
+
+  document.getElementById("menuScreen")
+  .classList.remove("hidden");
+
   window.scrollTo(0,0);
 }
 
 function makeQuestionText(){
-  const relation = document.getElementById("q_relation").value.trim();
-  const distance = document.getElementById("q_distance").value.trim();
-  const wish = document.getElementById("q_wish").value.trim();
-  const worry = document.getElementById("q_worry").value.trim();
+
+  const userName =
+  localStorage.getItem("tarot_userName")
+  || "あなた";
+
+  const partnerName =
+  localStorage.getItem("tarot_partnerName")
+  || "相棒";
+
+  const relation =
+  document.getElementById("q_relation")
+  .value.trim();
+
+  const distance =
+  document.getElementById("q_distance")
+  .value.trim();
+
+  const wish =
+  document.getElementById("q_wish")
+  .value.trim();
+
+  const worry =
+  document.getElementById("q_worry")
+  .value.trim();
 
   questionText =
-`【ふたりの質問シート】
+`${userName}です😊
+相棒の${partnerName}と一緒に読み解いてください🌈
+
+【ふたりの質問シート】
 
 ① ふたりの関係
 ${relation || "未入力"}
@@ -293,21 +402,29 @@ ${wish || "未入力"}
 ${worry || "未入力"}
 
 これから相性タロットの結果を送ります。
+
 相手の気持ちは決めつけず、
 ふたりの心をやさしく整える感じで
 安心できる言葉で短めに教えてください😊`;
 
-  document.getElementById("questionResult").textContent = questionText;
-  document.getElementById("questionResult").classList.remove("hidden");
+  document.getElementById("questionResult")
+  .textContent = questionText;
+
+  document.getElementById("questionResult")
+  .classList.remove("hidden");
 }
 
 function copyQuestionText(){
+
   if(!questionText){
     makeQuestionText();
   }
+
   navigator.clipboard.writeText(questionText);
+
   alert("コピーしたよ🌈");
 }
+
 </script>
 
 </body>
