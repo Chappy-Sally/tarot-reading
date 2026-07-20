@@ -196,6 +196,28 @@ button:active{
     font-size:17px;
     padding:16px 10px;
   }
+
+  .guide-btn{
+  margin-top:10px;
+}
+
+.guide-image-wrap{
+  width:92%;
+  max-width:500px;
+  margin:14px auto 0;
+  padding:10px;
+  background:rgba(255,255,255,0.9);
+  border-radius:22px;
+  box-shadow:0 6px 16px rgba(0,0,0,0.08);
+}
+
+.guide-image{
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:16px;
+}
+  
 }
 </style>
 </head>
@@ -271,6 +293,24 @@ button:active{
       占い師サリーと話す🎀
     </button>
 
+   <button
+  class="btn-sally guide-btn"
+  onclick="toggleSallyGuide()"
+>
+  🎀 サリーGPTの使い方
+</button>
+
+<div
+  id="sallyGuide"
+  class="guide-image-wrap hidden"
+>
+  <img
+    src="https://raw.githubusercontent.com/Chappy-Sally/chappy-sally-images/main/covers/cs_tukaikata_s.png"
+    alt="サリーGPTの使い方"
+    class="guide-image"
+  >
+</div>
+    
   </div>
 
 </div>
@@ -372,6 +412,21 @@ function openSallyGPT(){
     "noopener,noreferrer"
   );
 }
+  
+function toggleSallyGuide(){
+  const guide =
+    document.getElementById("sallyGuide");
+
+  guide.classList.toggle("hidden");
+
+  if(!guide.classList.contains("hidden")){
+    guide.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+  }
+}
+  
 </script>
 
 </body>
