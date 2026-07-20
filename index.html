@@ -48,45 +48,52 @@ h1{
   width:90%;
   max-width:460px;
   border-radius:22px;
-  margin:16px 0 20px;
+  margin:16px auto 20px;
+  display:block;
   box-shadow:0 8px 18px rgba(0,0,0,0.12);
 }
 
 .desc{
   font-size:18px;
-  line-height:1.9;
+  line-height:1.7;
   margin:0 0 24px;
   color:#7b5b39;
-  white-space:pre-line;
 }
 
 .choice-card{
   width:92%;
   max-width:500px;
   margin:18px auto 0;
-  padding:24px 14px;
+  padding:20px 14px;
   box-sizing:border-box;
-  background:rgba(255,255,255,0.76);
+  background:rgba(255,255,255,0.78);
   border-radius:26px;
   box-shadow:0 6px 16px rgba(0,0,0,0.06);
 }
 
+.choice-title{
+  font-size:19px;
+  font-weight:bold;
+  color:#6b4b2a;
+  margin-bottom:8px;
+  line-height:1.5;
+}
+
 .choice-note{
-  font-size:17px;
-  line-height:1.9;
+  font-size:16px;
+  line-height:1.55;
   color:#7b5b39;
-  margin-bottom:20px;
-  white-space:pre-line;
+  margin-bottom:14px;
 }
 
 button{
   width:90%;
   max-width:360px;
-  margin:0 auto 16px;
+  margin:0 auto 4px;
   display:block;
   border:none;
   border-radius:30px;
-  padding:17px 12px;
+  padding:16px 12px;
   font-size:18px;
   font-weight:bold;
   color:white;
@@ -173,10 +180,16 @@ button:active{
 
   .desc{
     font-size:16px;
+    line-height:1.6;
+  }
+
+  .choice-title{
+    font-size:18px;
   }
 
   .choice-note{
     font-size:15px;
+    line-height:1.5;
   }
 
   button{
@@ -206,28 +219,59 @@ button:active{
     alt="チャッピー＆サリーの私に戻るタロット"
   >
 
-  <p class="desc">カードをヒントにしながら
-やさしく今の自分と向き合う
-タロットアプリです😊🌿
+  <p class="desc">
+    カードをヒントにしながら<br>
+    やさしく今の自分と向き合う<br>
+    タロットアプリです😊🌿
+    <br><br>
+    カードを引いたあとは<br>
+    占い師サリーと一緒に<br>
+    今のあなたに必要なメッセージを<br>
+    受け取ってね🎀🔮
+  </p>
 
-カードを引いたあとは
-占い師サリーと一緒に
-今のあなたに必要なメッセージを
-受け取ってね🎀🔮</p>
 
-  <button
-    class="btn-pink"
-    onclick="openTarotMenu()"
-  >
-    🔮 タロットを引く
-  </button>
+  <div class="choice-card">
 
-  <button
-    class="btn-sally"
-    onclick="openSallyGPT()"
-  >
-    🎀 占い師サリーと話す
-  </button>
+    <div class="choice-title">
+      🔮 タロットを引いてみよう
+    </div>
+
+    <div class="choice-note">
+      今の気持ちや聞いてみたいことを選んで<br>
+      カードからやさしいヒントを受け取ります😊
+    </div>
+
+    <button
+      class="btn-pink"
+      onclick="openTarotMenu()"
+    >
+      タロットを引く🔮
+    </button>
+
+  </div>
+
+
+  <div class="choice-card">
+
+    <div class="choice-title">
+      🎀 占い師サリーと話す
+    </div>
+
+    <div class="choice-note">
+      カードを引いたあとは<br>
+      占い師サリーと一緒に<br>
+      今のあなたに必要なメッセージを受け取ってね😊
+    </div>
+
+    <button
+      class="btn-sally"
+      onclick="openSallyGPT()"
+    >
+      占い師サリーと話す🎀
+    </button>
+
+  </div>
 
 </div>
 
@@ -246,12 +290,14 @@ button:active{
 
     <div class="choice-card">
 
-      <div class="choice-note">今日はどちらでカードを引く？😊
-
-自分を整えたい時は通常メニュー。
-
-相性やふたりの流れを見たい時は
-相性占いへ進んでね💕</div>
+      <div class="choice-note">
+        今日はどちらでカードを引く？😊
+        <br><br>
+        自分を整えたい時は通常メニュー。
+        <br><br>
+        相性やふたりの流れを見たい時は<br>
+        相性占いへ進んでね💕
+      </div>
 
       <button
         class="btn-pink"
@@ -282,16 +328,10 @@ button:active{
 
 
 <script>
-/*
-  占い師サリーGPTが完成したら、
-  下の "" の中にURLを入れてね。
-*/
-
 const sallyGptUrl =
   "https://chatgpt.com/g/g-6a5c6080e44c8191a2462f67817ab405-sarigpt";
 
 
-/* タロットメニューを開く */
 function openTarotMenu(){
   document
     .getElementById("homeScreen")
@@ -305,7 +345,6 @@ function openTarotMenu(){
 }
 
 
-/* HOMEへ戻る */
 function goHome(){
   document
     .getElementById("tarotMenuScreen")
@@ -319,7 +358,6 @@ function goHome(){
 }
 
 
-/* 占い師サリーGPTを開く */
 function openSallyGPT(){
   if(!sallyGptUrl){
     alert(
